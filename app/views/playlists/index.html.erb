@@ -1,0 +1,48 @@
+<body class="bg-cream-theme">
+
+<div class="text-center py-4 py-md-5 mb-4 mb-md-5">
+  <h1 style="color: black" class="display-5 display-md-4 fw-bold">Select the playlist</h1>
+</div>
+<div class="container-fluid px-3 px-md-0">
+
+
+  <!-- Nombre de chansons -->
+  <div class="text-center mb-4 mb-md-5">
+    <h2 class="fs-5 fs-md-4">Number of songs:</h2>
+    <div class="fs-4 fs-md-3 fw-bold">
+      <button class="btn btn-light btn-sm">−</button>
+      <span class="text-warning mx-2 mx-md-3">10</span>
+      <button class="btn btn-light btn-sm">+</button>
+    </div>
+  </div>
+
+
+  <!-- Grille des playlists -->
+  <div class="py-2 px-2">
+<% @playlists.each_slice(3) do |playlist_row| %>
+    <div class="row mb-4 mb-md-2 g-4 g-md-2">
+      <% playlist_row.each do |playlist| %>
+        <div class="col-4 col-md-4">
+          <button class="btn btn-warning w-100 py-4 py-md-5 fw-bold fs-6 fs-md-5">
+            <%= playlist.title %>
+          </button>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  </div>
+
+
+  <!-- Boutons Match et Custom -->
+  <div class="row g-2 g-md-2 mb-5 mt-2">
+    <div class="col-6">
+
+      <button  class="btn btn-warning w-100 py-3 py-md-5 fw-bold fs-6 fs-md-5">Match</button>
+    </div>
+    <div class="col-6">
+
+      <button style="background-color: #FFD700;" class="btn btn-success w-100 py-3 py-md-5 fw-bold fs-6 fs-md-5">Custom</button>
+    </div>
+  </div>
+</div>
+</body>
