@@ -1,0 +1,8 @@
+<h1>Select your playlist</h1>
+<div>PLAYLIST SELECTION HERE</div>
+<%= simple_form_for @session do |f| %>
+    <%= f.input :playlist_id, collection: Playlist.all %>
+    <%= f.submit %>
+<% end %>
+
+<%# <div><%= link_to "START", new_user_session_path %>
