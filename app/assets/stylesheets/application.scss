@@ -10,3 +10,55 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "pages/index";
+
+
+// Background-theme colors :
+.bg-orange-theme{
+  background-color: #FF9500;;
+}
+
+.bg-yellow-theme {
+  background-color: #FFD700;
+}
+
+.bg-purple-theme {
+  background-color: #9D4EDD;
+}
+
+.bg-cream-theme {
+  background-color: #FFF8E7;
+}
+
+.bg-gray-theme {
+  background-color: #353535;
+}
+
+// Theme colors :
+
+.orange-theme {
+  color: #FF9500;
+}
+
+.yellow-theme {
+  color: #FFD700;
+}
+
+.purple-theme {
+  color: #9D4EDD;
+}
+
+.cream-theme {
+  color: #FFF8E7;
+}
+
+.gray-theme {
+  color: #353535;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+@import "components/sign_up";
