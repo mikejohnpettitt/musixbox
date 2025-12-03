@@ -2,10 +2,13 @@ class SessionsController < ApplicationController
 
   def new
     # this is the playlist select page
-    @session = Session.new 
+    @playlists = Playlist.all
+    @session = Session.new
   end
 
-  def create
+
+
+  def create  
     @session = Session.new(session_params)
     if @session.save
       # raise
@@ -21,10 +24,12 @@ class SessionsController < ApplicationController
       redirect_to play_session_path(@user_session)
 
     else
+      @playlists = Playlist.all
       render :new, status: :unprocessable_entity
     end
   end
 
+ 
   private
 
   def session_params
