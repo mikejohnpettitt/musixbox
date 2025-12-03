@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :playlists, only:[:index]
-  resources :questions, only:[:create, :show]
+  resources :questions, only:[:create, :show, :edit, :update]
 
   resources :sessions, only:[:create, :new]
   # below, , as: :play_sessions, path: "play_sessions" is added because otherwise it conflicts with devise
