@@ -13,11 +13,22 @@ user = User.create!(
   pseudo: "testAdmin"
 )
 
-
-    playlist_rnb = Playlist.create!({title:"R'n'b", user: user})
-    playlist_blues = Playlist.create!({title:"Blues", user: user})
-    playlist_hiphop = Playlist.create!({title:"Hip Hop", user: user})
-
+# MIKE
+  playlist_rock = Playlist.create!({title:"Rock", user: user})
+  playlist_jazz = Playlist.create!({title:"Jazz", user: user})
+  playlist_pop = Playlist.create!({title:"Pop", user: user})
+  # LUDO
+  playlist_rnb = Playlist.create!({title:"R'n'b", user: user})
+  playlist_blues = Playlist.create!({title:"Blues", user: user})
+  playlist_hiphop = Playlist.create!({title:"Hip Hop", user: user})
+  # ADIL
+  playlist_soul = Playlist.create!({title:"Soul", user: user})
+  playlist_funk = Playlist.create!({title:"Funk", user: user})
+  playlist_disco = Playlist.create!({title:"disco", user: user})
+  # AXEL
+  playlist_classic = Playlist.create!({title:"Classic", user: user})
+  playlist_punk = Playlist.create!({title:"Punk", user: user})
+  playlist_world = Playlist.create!({title:"World", user: user})
 
 Song.create!(
   [
@@ -67,22 +78,6 @@ playlist_blues = [
 ]
  )
 puts "success"
-    # MIKE
-    playlist_rock = Playlist.create!({title:"Rock", user: user})
-    playlist_jazz = Playlist.create!({title:"Jazz", user: user})
-    playlist_pop = Playlist.create!({title:"Pop", user: user})
-    # LUDO
-    playlist_rnb = Playlist.create!({title:"R'n'b", user: user})
-    playlist_blues = Playlist.create!({title:"Blues", user: user})
-    playlist_hiphop = Playlist.create!({title:"Hip Hop", user: user})
-    # ADIL
-    playlist_soul = Playlist.create!({title:"Soul", user: user})
-    playlist_funk = Playlist.create!({title:"Funk", user: user})
-    playlist_disco = Playlist.create!({title:"disco", user: user})
-    # AXEL
-    playlist_classic = Playlist.create!({title:"Classic", user: user})
-    playlist_punk = Playlist.create!({title:"Punk", user: user})
-    playlist_world = Playlist.create!({title:"World", user: user})
 
 Song.create!(
   [
