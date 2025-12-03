@@ -74,4 +74,9 @@ group :test do
   gem "selenium-webdriver"
 end
 
+# this is added to allow guest users
 gem "devise-guests"
+
+# this was added to compare user input with user answer
+gem 'fuzzy-string-match', '~> 1.0', '>= 1.0.1'
+

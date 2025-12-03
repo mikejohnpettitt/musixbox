@@ -1,25 +1,46 @@
-<h1>Gameplay</h1>
-User id: <%= @user_session.user_id %>
-Session id: <%= @user_session.session_id %>
+<div class="row" data-controller="toggle">
+  <h1>Gameplay</h1>
+  User id: <%= @user_session.user_id %><br>
+  Session id: <%= @user_session.session_id %><br>
+  Playlist: <%= Session.find(@user_session.session_id).playlist.title %>
 
-Playlist id: <%= Session.find(@user_session.session_id).playlist.title %>
-<%= @playlist = Session.find(@user_session.session_id).playlist %>
-
-<%= turbo_frame_tag "question" do %>
+  <%= turbo_frame_tag "question" do %>
     <%= render "questions/video", question: @current_question %>
-<% end %>
+  <% end %>
 
-
-    <div class="d-flex justify-content-center align-items-center flex-grow-1">
-                <%= link_to "#" do %>
-        <div class="buzzer d-flex justify-content-center align-items-center">
-            <div>
-                <%= image_tag "Logo sans nom 2.png", style: "width: 140px;" %>
-            </div>
+  <div class="d-flex justify-content-center align-items-center flex-grow-1">
+    <!-- 1) BUZZER VISIBLE FIRST -->
+    <%= link_to "#", data: { action: "click->toggle#buzz" } do %>
+      <div class="buzzer d-flex justify-content-center align-items-center"
+           data-toggle-target="buzzer">
+        <div>
+          <%= image_tag "Logo sans nom 2.png", style: "width: 140px;" %>
         </div>
-                <% end %>
+      </div>
+    <% end %>
+
+    <!-- 2) FORM HIDDEN INITIALLY -->
+    <div data-toggle-target="form" class="d-none">
+      <h1>Take your guess!</h1>
+      <%= simple_form_for @current_question,
+            data: { action: "turbo:submit-end->toggle#submitted" } do |f| %>
+        <%= f.input :user_answer_title,  label: "Title"  %>
+        <%= f.input :user_answer_artist, label: "Artist" %>
+        <%= f.submit "Go!" %>
+      <% end %>
+    </div>
+
+    <!-- 3) FEEDBACK HIDDEN INITIALLY -->
+    <div data-toggle-target="feedback" class="d-none">
+       <div> Title: <%= @current_question.song.title %>, you said: <%= @current_question.user_answer_title %>. Correct? <%= @current_question.successful_title.to_s %>.</div>
+       <div> Artist: <%= @current_question.song.artist %>, you said: <%= @current_question.user_answer_artist %>. Correct? <%= @current_question.successful_artist.to_s %>.</div>
+      <!-- put whatever feedback you want here -->
     </div>
   </div>
-  <div class="bottom-buttons d-flex">
-    <div class="button-right flex-grow-1"><%= link_to "Pass", play_session_path(@user_session, current_question: @current_question) %></div>
+</div>
+
+<div class="bottom-buttons d-flex">
+  <div class="button-right flex-grow-1">
+    <%= link_to "Pass", play_session_path(@user_session, current_question: @current_question) %>
   </div>
+</div>
