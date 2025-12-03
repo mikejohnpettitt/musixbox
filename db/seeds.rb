@@ -15,6 +15,7 @@ Playlist.destroy_all
 User.destroy_all
 
 puts "Création de l'utilisateur Admin de test..."
+
 user = User.create!(
   email: "adil@adil.com",
   password: "password",
@@ -38,6 +39,18 @@ user = User.create!(
     playlist_world = Playlist.create!({title:"World", user: user})
 
 
+Song.create!(
+  [
+    {playlist: playlist_punk, title: "Basket Case",               artist: "Green Day",           youtube_url: "https://www.youtube.com/embed/NUTGr5t3MoY?si=1c7iinecHj4k_wGy"},
+    {playlist: playlist_punk, title: "All the Small Things",      artist: "blink-182",           youtube_url: "https://www.youtube.com/embed/9Ht5RZpzPqw?si=pM9YxDOIr1j5IiV1"},
+    {playlist: playlist_punk, title: "Self Esteem",               artist: "The Offspring",       youtube_url: "https://www.youtube.com/embed/kkcbxjWG9Mc?si=lI2iYq9Eh3fPo5hG"},
+    {playlist: playlist_punk, title: "American Idiot",            artist: "Green Day",           youtube_url: "https://www.youtube.com/embed/Ee_uujKuJMI?si=o3vgBxdLnNxH2-4_"},
+    {playlist: playlist_punk, title: "What's My Age Again?",      artist: "blink-182",           youtube_url: "https://www.youtube.com/embed/k1BFHYtZlAU?si=o3kF0zGsNM_e6ppV"},
+    {playlist: playlist_punk, title: "Linoleum",                  artist: "NOFX",                youtube_url: "https://www.youtube.com/embed/d9ORimXBXLw?si=Wl-ZU0UnNv3ow013"},
+    {playlist: playlist_punk, title: "Time Bomb",                 artist: "Rancid",              youtube_url: "https://www.youtube.com/embed/LxaA9_mzOz4?si=Yb5ZDK3H9dxdB4E0"},
+    {playlist: playlist_punk, title: "Anarchy in the U.K.",       artist: "Sex Pistols",         youtube_url: "https://www.youtube.com/embed/qbmWs6Jf5dc?si=2q6_4VtY4UsKxZAb"},
+    {playlist: playlist_punk, title: "Blitzkrieg Bop",            artist: "Ramones",             youtube_url: "https://www.youtube.com/embed/NQDPx_k66w4?si=HsbkmnAR26-ax4sN"},
+    {playlist: playlist_punk, title: "London Calling",            artist: "The Clash",           youtube_url: "https://www.youtube.com/embed/LC2WpBcdM_A?si=VO9dGZwWh_qrR2SJ"}
 # FOR ROCK
 Song.create!(
   [
@@ -53,8 +66,11 @@ Song.create!(
     {playlist: playlist_rock, title: "Smells Like Teen Spirit", artist: "Nirvana", youtube_url: "https://www.youtube.com/embed/hTWKbfoikeg"}
   ]
 )
+test = Song.where(playlist: playlist_punk)
+puts "#{test.size} punk songs created"
 
 
+puts "success"
 # FOR JAZZ
 Song.create!(
   [
@@ -90,9 +106,7 @@ Song.create!(
 
 puts "success"
 
-Song.all.each do |song| 
-  system("open", song.youtube_url)
-end
+
 
 
   # create_table "playlists", force: :cascade do |t|
