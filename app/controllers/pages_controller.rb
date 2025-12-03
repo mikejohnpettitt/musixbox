@@ -4,4 +4,7 @@ class PagesController < ApplicationController
   def home
       puts current_or_guest_user.inspect
   end
+
+  def test_results
+  end
 end

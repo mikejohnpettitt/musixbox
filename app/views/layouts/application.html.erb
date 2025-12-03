@@ -8,6 +8,13 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <% if content_for?(:meta_title) %>
+      <meta property="og:title" content="<%= yield(:meta_title) %>">
+      <meta property="og:description" content="<%= yield(:meta_description) %>">
+      <meta property="og:image" content="<%= yield(:meta_image) %>">
+      <meta property="og:url" content="<%= request.original_url %>">
+      <meta property="og:type" content="website">
+    <% end %>
   </head>
 
   <body><%= render "shared/navbar" %>

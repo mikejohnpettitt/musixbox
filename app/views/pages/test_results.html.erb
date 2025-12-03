@@ -1,0 +1,46 @@
+<% content_for :meta_title, "result" %>
+<% content_for :meta_description, "description" %>
+<%# <% content_for :meta_image, url_for(@result.image) %>
+
+<div class="container" style="max-width: 375px; padding: 0 20px; margin: 0 auto;">
+  <div class="card-wrapper" style="width: 80%; margin: 0 auto;">
+    <%= render "card" %>
+  </div>
+  <div style="display: flex; width: 100%;">
+    <a class="btn btn-red" style="width: 50%;">Save to phone</a>
+    <a href="#" target="_blank" class="btn btn-yellow" style="width: 50%;">share facebook</a>
+  </div>
+</div>
+
+
+
+
+<style>
+  .btn {
+  display: inline-block;
+  width: 150px;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  margin: 0;
+}
+
+.btn-red {
+  background-color: #FF9500;
+}
+
+.btn-yellow {
+  background-color: #FFD602;
+}
+
+/* .btn-blue {
+  background-color: #3498db;
+} */
+
+.card-result {
+  border: solid 2px black;
+  border-radius: 4px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+</style>
