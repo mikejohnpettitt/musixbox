@@ -1,4 +1,25 @@
 <h1>Gameplay</h1>
 User id: <%= @user_session.user_id %>
 Session id: <%= @user_session.session_id %>
-Group id: <%= @user_session.group_id %>
+
+Playlist id: <%= Session.find(@user_session.session_id).playlist.title %>
+<%= @playlist = Session.find(@user_session.session_id).playlist %>
+
+<%= turbo_frame_tag "question" do %>
+    <%= render "questions/video", question: @current_question %>
+<% end %>
+
+
+    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+                <%= link_to "#" do %>
+        <div class="buzzer d-flex justify-content-center align-items-center">
+            <div>
+                <%= image_tag "Logo sans nom 2.png", style: "width: 140px;" %>
+            </div>
+        </div>
+                <% end %>
+    </div>
+  </div>
+  <div class="bottom-buttons d-flex">
+    <div class="button-right flex-grow-1"><%= link_to "Pass", play_session_path(@user_session, current_question: @current_question) %></div>
+  </div>
