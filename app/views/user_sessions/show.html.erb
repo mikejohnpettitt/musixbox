@@ -23,7 +23,7 @@
     <div data-toggle-target="form" class="d-none">
       <h1>Take your guess!</h1>
       <%= simple_form_for @current_question,
-            data: { action: "turbo:submit-end->toggle#submitted" } do |f| %>
+            data: { action: "turbo:submit-end->toggle#submitted", turbo_frame: "feedback_content" } do |f| %>
         <%= f.input :user_answer_title,  label: "Title"  %>
         <%= f.input :user_answer_artist, label: "Artist" %>
         <%= f.submit "Go!" %>
@@ -31,11 +31,11 @@
     </div>
 
     <!-- 3) FEEDBACK HIDDEN INITIALLY -->
-    <div data-toggle-target="feedback" class="d-none">
-       <div> Title: <%= @current_question.song.title %>, you said: <%= @current_question.user_answer_title %>. Correct? <%= @current_question.successful_title.to_s %>.</div>
-       <div> Artist: <%= @current_question.song.artist %>, you said: <%= @current_question.user_answer_artist %>. Correct? <%= @current_question.successful_artist.to_s %>.</div>
-      <!-- put whatever feedback you want here -->
-    </div>
+       <turbo-frame id="feedback_content">
+        <div data-toggle-target="feedback" class="d-none">
+
+        </div>
+      </turbo-frame>
   </div>
 </div>
 
