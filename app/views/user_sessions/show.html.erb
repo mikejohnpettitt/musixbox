@@ -1,46 +1,51 @@
-<div class="row" data-controller="toggle">
-  <h1>Gameplay</h1>
-  User id: <%= @user_session.user_id %><br>
+<h1>Gameplay</h1>
+User id: <%= @user_session.user_id %><br>
   Session id: <%= @user_session.session_id %><br>
-  Playlist: <%= Session.find(@user_session.session_id).playlist.title %>
+    Playlist: <%= Session.find(@user_session.session_id).playlist.title %>
 
-  <%= turbo_frame_tag "question" do %>
-    <%= render "questions/video", question: @current_question %>
-  <% end %>
+      <%= turbo_frame_tag "question" do %>
+        <%= render "questions/video" , question: @current_question %>
+          <% end %>
 
-  <div class="d-flex justify-content-center align-items-center flex-grow-1">
-    <!-- 1) BUZZER VISIBLE FIRST -->
-    <%= link_to "#", data: { action: "click->toggle#buzz" } do %>
-      <div class="buzzer d-flex justify-content-center align-items-center"
-           data-toggle-target="buzzer">
-        <div>
-          <%= image_tag "Logo sans nom 2.png", style: "width: 140px;" %>
-        </div>
-      </div>
-    <% end %>
+            <div class="row" data-controller="toggle">
+              <div class="d-flex justify-content-center align-items-center flex-grow-1">
+                <!-- 1) BUZZER VISIBLE FIRST -->
+                <%= link_to "#" , data: { action: "click->toggle#buzz" } do %>
+                  <div class="buzzer d-flex justify-content-center align-items-center" data-toggle-target="buzzer">
+                    <div>
+                      <%= image_tag "Logo sans nom 2.png" , style: "width: 140px;" %>
+                    </div>
+                  </div>
+                  <% end %>
 
-    <!-- 2) FORM HIDDEN INITIALLY -->
-    <div data-toggle-target="form" class="d-none">
-      <h1>Take your guess!</h1>
-      <%= simple_form_for @current_question,
-            data: { action: "turbo:submit-end->toggle#submitted", turbo_frame: "feedback_content" } do |f| %>
-        <%= f.input :user_answer_title,  label: "Title"  %>
-        <%= f.input :user_answer_artist, label: "Artist" %>
-        <%= f.submit "Go!" %>
-      <% end %>
-    </div>
+                    <!-- 2) FORM HIDDEN INITIALLY -->
+                    <div data-controller="counter">
+                      <div data-toggle-target="form" class="d-none">
+                        <h1>Take your guess!</h1>
+                        <%= simple_form_for @current_question, data: {
+                          action: "submit->counter#saveTime turbo:submit-end->toggle#submitted" ,
+                          turbo_frame: "feedback_content" } do |f| %>
+                          <%= f.hidden_field :time_taken, data: { counter_target: "input" }%>
+                            <%= f.input :user_answer_title, label: "Title" %>
+                              <%= f.input :user_answer_artist, label: "Artist" %>
+                                <%= f.submit "Go!" %>
+                                  <% end %>
+                      </div>
+                      <p>Temps écoulé: <span data-counter-target="display">0:00</span></p>
+                    </div>
 
-    <!-- 3) FEEDBACK HIDDEN INITIALLY -->
-       <turbo-frame id="feedback_content">
-        <div data-toggle-target="feedback" class="d-none">
+                    <!-- 3) FEEDBACK HIDDEN INITIALLY -->
+                    <turbo-frame id="feedback_content">
+                      <div data-toggle-target="feedback" class="d-none">
+                        <!-- 4) Render du feedback -->
+                      </div>
+                    </turbo-frame>
+              </div>
+            </div>
 
-        </div>
-      </turbo-frame>
-  </div>
-</div>
 
-<div class="bottom-buttons d-flex">
-  <div class="button-right flex-grow-1">
-    <%= link_to "Pass", play_session_path(@user_session, current_question: @current_question) %>
-  </div>
-</div>
+            <div class="bottom-buttons d-flex">
+              <div class="button-right flex-grow-1">
+                <%= link_to "Pass" , play_session_path(@user_session, current_question: @current_question) %>
+              </div>
+            </div>
