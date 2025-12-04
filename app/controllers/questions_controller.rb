@@ -17,7 +17,6 @@ class QuestionsController < ApplicationController
       @accuracy_artist >= 0.85 ? @question.successful_artist = 1 : @question.successful_artist = 0
       @accuracy_title >= 0.85 ? @question.successful_title = 1 : @question.successful_title = 0
       @question.save
-
       render partial: "feedback_content", locals: {question: @question}
     else
       render :edit, status: :unprocessable_entity
@@ -28,6 +27,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:user_answer_title, :user_answer_artist, :successful_artist, :successful_title)
+    params.require(:question).permit(:user_answer_title, :user_answer_artist, :successful_artist, :successful_title, :time_taken)
   end
 end
