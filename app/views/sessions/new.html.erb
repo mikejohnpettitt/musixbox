@@ -29,7 +29,7 @@
     <% @playlists.each do |playlist| %>
       <div class="col-4">
         <input type="radio" name="playlist_radio" id="playlist_<%= playlist.id %>" value="<%= playlist.id %>" class="d-none" data-session-target="playlist" data-action="change->session#select">
-        <label for="playlist_<%= playlist.id %>" class="btn btn-warning w-100 py-4 fw-bold fs-6">
+        <label for="playlist_<%= playlist.id %>" class="btn bg-orange-theme w-100 py-4 fw-bold fs-6">
           <%= playlist.title %>
         </label>
       </div>
@@ -37,7 +37,7 @@
   </div>
 
   <!-- Bouton Create Session -->
-  <button type="submit" class="btn w-100 py-3 py-md-5 fw-bold fs-6 fs-md-5 mt-4" style="background-color: #FFD700;">
+  <button type="submit" class="btn w-100 py-3 py-md-5 fw-bold fs-6 fs-md-5 mt-4 bg-yellow-theme">
     Create Session
   </button>
 </form>
