@@ -6,7 +6,7 @@ static targets = ["value", "hiddenCount", "hiddenPlaylist", "playlist"]
   connect() { 
      this.count = parseInt(this.valueTarget.textContent)
      this.max = 10
-     this.min = 0
+     this.min = 1
      this.updateHiddenFields()
   }
   increment(){

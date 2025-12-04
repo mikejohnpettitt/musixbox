@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :playlists
   has_many :user_sessions
-  validates :pseudo, presence: true, uniqueness: true
+  # validates :pseudo, presence: true, uniqueness: true
 end
 
 

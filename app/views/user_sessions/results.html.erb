@@ -1,1 +1,12 @@
 <h1>Your results</h1>
+<ul>
+<% Question.where(session: @user_session.session).each do |question| %>
+<li>
+<%= question.song.title %>
+<%= question.song.artist %>
+<%= "You said: "%>
+<%= question.user_answer_title %>
+<%= question.user_answer_artist %>
+</li>
+<% end %>
+</ul>

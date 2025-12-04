@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:playlist_id)
+    params.require(:session).permit(:playlist_id, :number_of_questions)
   end
 
 end
