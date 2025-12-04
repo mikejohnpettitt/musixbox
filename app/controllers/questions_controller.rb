@@ -10,17 +10,18 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     if @question.update(question_params)
-      # redirect_to @quiz # or wherever
+      jarow = FuzzyStringMatch::JaroWinkler.create( :native )
+      @accuracy_title = jarow.getDistance(@question.user_answer_title.downcase, @question.song.title.downcase)
+      @accuracy_artist = jarow.getDistance(@question.user_answer_artist.downcase, @question.song.artist.downcase)
+
+      @accuracy_artist >= 0.85 ? @question.successful_artist = 1 : @question.successful_artist = 0
+      @accuracy_title >= 0.85 ? @question.successful_title = 1 : @question.successful_title = 0
+      @question.save
+
+      render partial: "feedback_content", locals: {question: @question}
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
-
-    jarow = FuzzyStringMatch::JaroWinkler.create( :native )
-    @accuracy_title = jarow.getDistance(@question.user_answer_title.downcase, @question.song.title.downcase)
-    @accuracy_artist = jarow.getDistance(@question.user_answer_artist.downcase, @question.song.artist.downcase)
-
-    @accuracy_artist >= 0.85 ? @question.successful_artist = 1 : @question.successful_artist = 0
-    @accuracy_title >= 0.85 ? @question.successful_title = 1 : @question.successful_title = 0
 
   end
 
@@ -30,5 +31,3 @@ class QuestionsController < ApplicationController
     params.require(:question).permit(:user_answer_title, :user_answer_artist, :successful_artist, :successful_title)
   end
 end
-
-
