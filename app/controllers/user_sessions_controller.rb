@@ -1,6 +1,8 @@
 class UserSessionsController < ApplicationController
 
-  
+
+
+
   def show
     @user_session = current_or_guest_user.user_sessions.find(params[:id])
     @playlist = @user_session.session.playlist
@@ -15,6 +17,29 @@ class UserSessionsController < ApplicationController
       @current_question = Question.where(session_id: @user_session.session_id).first
     end
   end
+
+  def results
+          # 1. Trouver la UserSession
+    @user_session = UserSession.find(params[:id])
+    @user_session = UserSession.find(params[:id])
+    @questions = @user_session.session.questions
+
+    # 1. Le temps de réponse le plus rapide (toutes questions confondues)
+    if @questions.any?
+      @fastest_response = @questions.order(:time_taken).first
+
+      # 2. Le titre trouvé le plus vite (uniquement les titres corrects)
+      @fastest_title = @questions
+        .where(successful_title: true)  # seulement les titres corrects
+        .order(:time_taken)             # tri par temps ascendant
+        .first                          # prend le plus rapide
+    else
+      @fastest_response = nil
+      @fastest_title = nil
+    end
+  end
+
+
 
 
 end

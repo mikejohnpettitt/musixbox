@@ -8,7 +8,8 @@ class SessionsController < ApplicationController
 
 
 
-  def create  
+  def create
+
     @session = Session.new(session_params)
     if @session.save
       # raise
@@ -29,7 +30,7 @@ class SessionsController < ApplicationController
     end
   end
 
- 
+
   private
 
   def session_params

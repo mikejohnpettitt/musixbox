@@ -1,0 +1,18 @@
+<h1>Page des Résultats</h1>
+<p>UserSession ID : <%= @user_session.id %></p>
+<p>Cette page affichera bientôt les stats !</p>
+<h1>RESULTATS</h1>
+
+<% if @fastest_response %>
+  <h3>Plus rapide :</h3>
+  <p>Temps : <%= @fastest_response.time_taken %> secondes</p>
+  <p>Chanson : <%= @fastest_response.song.title %></p>
+<% end %>
+
+<% if @fastest_title %>
+  <h3>Titre trouvé le plus vite :</h3>
+  <p>Temps : <%= @fastest_title.time_taken %> secondes</p>
+  <p>Votre réponse : <%= @fastest_title.user_answer_title %></p>
+<% else %>
+  <p>Aucun titre correct</p>
+<% end %>
