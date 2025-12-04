@@ -6,10 +6,7 @@ class SessionsController < ApplicationController
     @session = Session.new
   end
 
-
-
   def create
-
     @session = Session.new(session_params)
     if @session.save
       # raise
@@ -34,7 +31,7 @@ class SessionsController < ApplicationController
   private
 
   def session_params
-    params.require(:session).permit(:playlist_id)
+    params.require(:session).permit(:playlist_id, :number_of_questions)
   end
 
 end
