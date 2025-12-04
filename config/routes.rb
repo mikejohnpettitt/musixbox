@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
+  get 'camera/show'
   get 'questions/show'
   devise_for :users
   root to: "pages#home"
+  
 
   resources :playlists, only:[:index]
   resources :questions, only:[:create, :show, :edit, :update]
@@ -14,5 +16,6 @@ Rails.application.routes.draw do
   # get "test_results", to: "pages#test_results"
 
   get "play_sessions/:id/results", to: "user_sessions#results", as: "play_session_results"
+  get "play_sessions/:id/results/share", to: "user_sessions#share", as: "play_session_results_share"
 
 end

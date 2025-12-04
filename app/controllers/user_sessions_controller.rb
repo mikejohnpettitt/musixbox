@@ -31,5 +31,8 @@ class UserSessionsController < ApplicationController
     @user_session = current_or_guest_user.user_sessions.find(params[:id])
     
   end
+  def share
+    @user_session = current_or_guest_user.user_sessions.find(params[:id])
+  end
 
 end

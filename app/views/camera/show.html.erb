@@ -1,0 +1,20 @@
+<div data-controller="camera">
+  <h1>Test Caméra</h1>
+  
+  <video data-camera-target="video" autoplay style="width: 100%; border: 1px solid black;"></video>
+  <canvas data-camera-target="canvas" style="display: none;"></canvas>
+  
+  <br><br>
+  <button data-action="camera#startCamera" style="padding: 10px 20px; font-size: 16px;">
+    Démarrer caméra
+  </button>
+  <button data-action="camera#capturePhoto" style="padding: 10px 20px; font-size: 16px;">
+    Prendre photo
+  </button>
+  <button data-action="camera#retakePhoto" style="padding: 10px 20px; font-size: 16px; display: none;">
+    Recommencer
+  </button>
+  
+  <br><br>
+  <img data-camera-target="preview" alt="preview" style=" width: 100%; border: 1px solid black;">
+</div>
