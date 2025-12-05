@@ -1,18 +1,32 @@
-<h1>Page des Résultats</h1>
-<p>UserSession ID : <%= @user_session.id %></p>
-<p>Cette page affichera bientôt les stats !</p>
-<h1>RESULTATS</h1>
 
-<% if @fastest_response %>
-  <h3>Plus rapide :</h3>
-  <p>Temps : <%= @fastest_response.time_taken %> secondes</p>
-  <p>Chanson : <%= @fastest_response.song.title %></p>
-<% end %>
+<div class="container d-flex flex-column" style="height: calc(100vh - 73px);">
 
-<% if @fastest_title %>
-  <h3>Titre trouvé le plus vite :</h3>
-  <p>Temps : <%= @fastest_title.time_taken %> secondes</p>
-  <p>Votre réponse : <%= @fastest_title.user_answer_title %></p>
-<% else %>
-  <p>Aucun titre correct</p>
-<% end %>
+  <div class="flex-grow-1 overflow-auto">
+    <h1>Page des Résultats</h1>
+    <p>UserSession ID : <%= @user_session.id %></p>
+    <p>Cette page affichera bientôt les stats !</p>
+    <h1>RESULTATS</h1>
+
+    <% if @fastest_response %>
+      <h3>Plus rapide :</h3>
+      <p>Temps : <%= @fastest_response.time_taken %> secondes</p>
+      <p>Chanson : <%= @fastest_response.song.title %></p>
+    <% end %>
+
+    <% if @fastest_title %>
+      <h3>Titre trouvé le plus vite :</h3>
+      <p>Temps : <%= @fastest_title.time_taken %> secondes</p>
+      <p>Votre réponse : <%= @fastest_title.user_answer_title %></p>
+    <% else %>
+      <p>Aucun titre correct</p>
+    <% end %>
+  </div>
+
+  <div class="bottom-buttons d-flex mt-4 mt-md-auto">
+    <div class="button-left flex-grow-1">Share results</div>
+    <%= link_to play_session_results_share_path(@user_session), class: "button-right flex-grow-1" do %>
+      Add selfie
+    <% end %>
+</div>
+
+</div>
