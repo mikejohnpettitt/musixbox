@@ -1,3 +1,4 @@
+@import "components/sign_up";
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -61,4 +62,14 @@ a {
   color: black;
 }
 
-@import "components/sign_up";
+//bootstrap edit
+
+.btn-select:hover {
+  background-color: #9D4EDD;
+  color: white;
+  border-color: #9D4EDD;
+}
+
+body {
+  overflow: hidden;
+}
