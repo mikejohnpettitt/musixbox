@@ -11,6 +11,7 @@ export default class extends Controller {
   }
 
   submitted(event) {
+
     // Only switch on successful response
     if (!event.detail.success) return
 

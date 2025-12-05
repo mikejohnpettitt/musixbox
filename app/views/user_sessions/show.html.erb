@@ -29,8 +29,8 @@ Question: <%#= @current_question.id %>-->
                           action: "submit->counter#saveTime turbo:submit-end->toggle#submitted" ,
                           turbo_frame: "feedback_content" } do |f| %>
         <%= f.hidden_field :time_taken, data: { counter_target: "input" }%>
-        <%= f.input :user_answer_title, label: "Title" %>
         <%= f.input :user_answer_artist, label: "Artist" %>
+        <%= f.input :user_answer_title, label: "Title" %>
         <%= f.submit "Go!" %>
       <% end %>
     </div>
@@ -39,9 +39,9 @@ Question: <%#= @current_question.id %>-->
 
   <!-- 3) FEEDBACK HIDDEN INITIALLY -->
   <turbo-frame id="feedback_content">
-    <div data-toggle-target="feedback" class="d-none">
+    
       <!-- 4) Render du feedback -->
-    </div>
+
   </turbo-frame>
 </div>
 <div class="bottom-buttons d-flex">

@@ -1,6 +1,13 @@
+<div data-toggle-target="feedback" class="d-none" data-success="<%= @question.successful_title && @question.successful_artist %>">
 <turbo-frame id="feedback_content">
+  <% if @question.successful_title && @question.successful_artist %>
   <div class="d-block">
+    <h2>Correct!</h2>
     <div> Title: <%= question.song.title %>, you said: <%= question.user_answer_title %>. Correct? <%= question.successful_title.to_s %>.</div>
     <div> Artist: <%= question.song.artist %>, you said: <%= question.user_answer_artist %>. Correct? <%= question.successful_artist.to_s %>.</div>
   </div>
+  <% else %>
+  <h2>Incorrect</h2>
+  <% end %>
 </turbo-frame>
+</div>

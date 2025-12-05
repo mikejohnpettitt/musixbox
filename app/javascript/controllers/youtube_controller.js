@@ -48,5 +48,13 @@ export default class extends Controller {
     }
   }
 
+  play() {
+    console.log("play() called")
+    if (this.ytPlayer) {
+      this.ytPlayer.playVideo()
+    }
+  }
+
+
 
 }
