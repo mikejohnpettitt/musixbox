@@ -1,13 +1,17 @@
 <turbo-frame id="feedback_content">
-<div data-toggle-target="feedback" data-success="<%= @question.successful_title && @question.successful_artist %>">
-  <% if @question.successful_title && @question.successful_artist %>
-  <div class="d-block">
-    <h2>Correct!</h2>
-    <div> Title: <%= question.song.title %>, you said: <%= question.user_answer_title %>. Correct? <%= question.successful_title.to_s %>.</div>
-    <div> Artist: <%= question.song.artist %>, you said: <%= question.user_answer_artist %>. Correct? <%= question.successful_artist.to_s %>.</div>
+  <div data-toggle-target="feedback" data-success="<%= question.successful_title && question.successful_artist %>">
+    <% if question.successful_title && question.successful_artist %>
+      <div class="d-block">
+        <h2>Correct!</h2>
+        <div> Artist: <%= question.song.artist %> ✅</div>
+        <div> Title: <%= question.song.title %> ✅</div>
+      </div>
+    <% else %>
+      <div class="d-block">
+        <h2>Keep going!</h2>
+        <div> Artist: <%= question.successful_artist ? "#{question.song.artist} ✅" : "#{question.user_answer_artist} ❌"%></div>
+        <div> Title: <%= question.successful_title ? "#{question.song.title} ✅" : "#{question.user_answer_title} ❌"%></div>
+      </div>
+    <% end %>
   </div>
-  <% else %>
-  <h2>Incorrect</h2>
-  <% end %>
-</div>
 </turbo-frame>
