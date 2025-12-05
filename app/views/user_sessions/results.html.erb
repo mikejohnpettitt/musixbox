@@ -1,5 +1,5 @@
 
-<div class="container d-flex flex-column" style="height: calc(100vh - 73px);">
+<div class="container-100 d-flex flex-column">
 
   <div class="flex-grow-1 overflow-auto">
     <h1>Page des Résultats</h1>
@@ -22,11 +22,15 @@
     <% end %>
   </div>
 
-  <div class="bottom-buttons d-flex mt-4 mt-md-auto">
-    <div class="button-left flex-grow-1">Share results</div>
-    <%= link_to play_session_results_share_path(@user_session), class: "button-right flex-grow-1" do %>
+  <div class="bottom-buttons d-flex">
+    <%= link_to share_card_play_session_path(@user_session),  # ⬅️ CORRECTION ICI
+              target: "_blank",
+              class: "button-left flex-grow-1 fs-6" do %>
+    Share results
+    <% end %>
+    <%= link_to play_session_results_share_path(@user_session), class: "button-right w-50 bg-yellow-theme py-2" do %>
       Add selfie
     <% end %>
-</div>
+  </div>
 
 </div>

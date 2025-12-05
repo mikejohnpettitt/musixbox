@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Share Card - MusixBox</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <style>
+    /* UNIQUEMENT pour cacher les éléments inutiles */
+    header, footer, nav, .navbar { display: none !important; }
+
+    /* Pour impression/screenshot propre */
+    @media print {
+      .no-print { display: none !important; }
+    }
+  </style>
+</head>
+<body class="bg-gradient d-flex align-items-center min-vh-100">
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+
+        <!-- TA CARD EXISTANTE -->
+        <%= render "shared/card" %>
+
+        <!-- Boutons actions (cachés au print) -->
+        <div class="mt-4 text-center no-print">
+          <button onclick="window.print()" class="btn btn-primary me-2">
+            <i class="bi bi-printer"></i> Imprimer/PDF
+          </button>
+          <button onclick="shareToTwitter()" class="btn btn-info">
+            <i class="bi bi-twitter"></i> Partager sur Twitter
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript simple -->
+  <script>
+    function shareToTwitter() {
+      const text = "J'ai joué sur MusixBox ! 🎸";
+      const url = window.location.href;
+      const hashtags = "MusixBox,QuizMusical";
+
+      window.open(
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${hashtags}`,
+        '_blank'
+      );
+    }
+  </script>
+
+</body>
+</html>

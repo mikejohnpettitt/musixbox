@@ -15,12 +15,12 @@ data-controller="camera">
     <img data-camera-target="preview" alt=""
       style="display: none; width: 100%; border-radius: 8px;">
   </div>
-  
+
   <%# Canvas invisible pour capturer la photo %>
   <canvas data-camera-target="canvas" style="display: none;"></canvas>
   <%# Champ caché pour stocker la photo (optionnel) %>
   <input type="hidden" data-camera-target="photoInput" name="photo_data">
-  
+
   <%# BOUTONS CAMÉRA %>
   <div class="d-grid gap-2 mb-3">
     <%# Bouton Démarrer la caméra %>
@@ -44,23 +44,23 @@ data-controller="camera">
       🔄 Reprendre
     </button>
   </div>
-  
+
   <%# ZONE CARD (cachée au début, visible après photo) %>
   <div class="card-wrapper"
     style="width: 100%; margin: 0 auto; margin-bottom: 1rem; display: none;"
     data-camera-target="cardWrapper">
-    <%= render "card" %>
+    <%= render "shared/card" %>
   </div>
-  
+
   <%# BOUTONS ACTION (avec link_to) %>
   <div class="d-grid gap-2">
-    <button type="button" 
-      class="btn btn-warning" 
+    <button type="button"
+      class="btn btn-warning"
       data-action="click->camera#downloadPhoto">
       💾 Save to phone
     </button>
-    <button type="button" 
-      class="btn btn-info" 
+    <button type="button"
+      class="btn btn-info"
       data-action="click->camera#shareToInstagram">
       📤 Share to Instagram
     </button>

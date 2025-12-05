@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   resources :user_sessions, only:[:show], as: :play_sessions, path: "play_sessions" do
     member do
       get :results  # ✅ Cette ligne ajoute la route results
+      get :share_card         # nouvelle route pour la création de la share_card.
+
     end
   end
   post "update_song_count", to: "sessions#update_count"
