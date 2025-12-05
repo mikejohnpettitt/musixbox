@@ -23,9 +23,9 @@
   </div>
 
   <div class="bottom-buttons d-flex">
-    <%= link_to share_card_play_session_path(@user_session),  # ⬅️ CORRECTION ICI
+    <%= link_to share_card_play_session_path(@user_session),
               target: "_blank",
-              class: "button-left flex-grow-1 fs-6" do %>
+              class: "button-left flex-grow-1 bg-orange-theme fs-6" do %>
     Share results
     <% end %>
     <%= link_to play_session_results_share_path(@user_session), class: "button-right w-50 bg-yellow-theme py-2" do %>

@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html>
+
 <head>
   <title>Share Card - MusixBox</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,36 +19,37 @@
     <div class="row justify-content-center">
       <div class="col-12 col-md-8 col-lg-6">
 
-        <!-- TA CARD EXISTANTE -->
         <%= render "shared/card" %>
 
-        <!-- Boutons actions (cachés au print) -->
-        <div class="mt-4 text-center no-print">
-          <button onclick="window.print()" class="btn btn-primary me-2">
-            <i class="bi bi-printer"></i> Imprimer/PDF
-          </button>
-          <button onclick="shareToTwitter()" class="btn btn-info">
-            <i class="bi bi-twitter"></i> Partager sur Twitter
+         <!-- BOUTON SIMPLE POUR PARTAGE -->
+        <div class="text-center mt-4">
+          <button onclick="shareResults()" class="btn btn-primary btn-lg">
+            📤 Partager mes résultats
           </button>
         </div>
 
-      </div>
+
+      </div> 
+
     </div>
   </div>
-
-  <!-- JavaScript simple -->
-  <script>
-    function shareToTwitter() {
-      const text = "J'ai joué sur MusixBox ! 🎸";
-      const url = window.location.href;
-      const hashtags = "MusixBox,QuizMusical";
-
-      window.open(
-        `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${hashtags}`,
-        '_blank'
-      );
+ <script>
+    function shareResults() {
+      // Action simple de partage
+      if (navigator.share) {
+        // Partager sur mobile
+        navigator.share({
+          title: 'Mes résultats MusixBox',
+          text: 'J\'ai terminé ma session sur MusixBox ! 🎵',
+          url: window.location.href
+        });
+      } else {
+        // Copier le lien sur desktop
+        navigator.clipboard.writeText(window.location.href)
+          .then(() => alert('Lien copié ! Collez-le pour partager.'));
+      }
     }
   </script>
 
+
 </body>
-</html>
