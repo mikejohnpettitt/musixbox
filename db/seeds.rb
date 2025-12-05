@@ -1,5 +1,6 @@
 
 UserSession.destroy_all
+Question.destroy_all
 Session.destroy_all
 Song.destroy_all
 Playlist.destroy_all

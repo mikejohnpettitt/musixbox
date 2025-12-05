@@ -3,46 +3,49 @@ User id: <%#= @user_session.user_id %><br>
 Session id: <%#= @user_session.session_id %><br>
 Playlist: <%#= Session.find(@user_session.session_id).playlist.title %>
 Question: <%#= @current_question.id %>-->
-<div data-controller="youtube toggle">
-  <%= turbo_frame_tag "question" do %>
-    <div>
-      <%= render "questions/video" , question: @current_question %>
-    </div>
-  <% end %>
-
-    <div class="d-flex justify-content-center align-items-center flex-grow-1">
-      <!-- 1) BUZZER VISIBLE FIRST -->
-      <%= link_to "#" , data: { action: "click->youtube#pause click->toggle#buzz" } do %>
-        <div class="buzzer d-flex justify-content-center align-items-center bg-orange-theme" data-toggle-target="buzzer">
-          <div>
-            <%= image_tag "Logo sans nom 2.png" , style: "width: 140px;" %>
-          </div>
+<div class="container-100 d-flex flex-column justify-content-between position-relative">
+  <div class="doudou" data-controller="youtube toggle">
+    <div class="container-30">
+      <%= turbo_frame_tag "question" do %>
+        <div>
+          <%= render "questions/video" , question: @current_question %>
         </div>
       <% end %>
     </div>
-
-  <!-- 2) FORM HIDDEN INITIALLY -->
-  <div data-controller="counter" class="container">
-    <div data-toggle-target="form" class="d-none">
-      <h1>Take your guess!</h1>
-      <%= simple_form_for @current_question, data: {
+    <div class="container-45">
+      <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <!-- 1) BUZZER VISIBLE FIRST -->
+        <%= link_to "#" , data: { action: "click->youtube#pause click->toggle#buzz" } do %>
+          <div class="buzzer d-flex justify-content-center align-items-center bg-orange-theme" data-toggle-target="buzzer">
+            <div>
+              <%= image_tag "Logo sans nom 2.png" , style: "width: 140px;" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <!-- 2) FORM HIDDEN INITIALLY -->
+      <div data-controller="counter" class="container">
+        <div data-toggle-target="form" class="d-none">
+          <h1>Take your guess!</h1>
+          <%= simple_form_for @current_question, data: {
                           action: "submit->counter#saveTime turbo:submit-end->toggle#submitted" ,
                           turbo_frame: "feedback_content" } do |f| %>
-        <%= f.hidden_field :time_taken, data: { counter_target: "input" }%>
-        <%= f.input :user_answer_artist, label: "Artist" %>
-        <%= f.input :user_answer_title, label: "Title" %>
-        <%= f.submit "Go!" %>
-      <% end %>
+            <%= f.hidden_field :time_taken, data: { counter_target: "input" }%>
+            <%= f.input :user_answer_artist, placeholder: "Artist", label_html: { class: "sr-only" }%>
+            <%= f.input :user_answer_title, placeholder: "Title", label_html: { class: "sr-only" }%>
+            <%= f.submit "Go!" %>
+          <% end %>
+        </div>
+      </div>
+      <!-- 3) FEEDBACK HIDDEN INITIALLY -->
+      <turbo-frame id="feedback_content">
+        <!-- 4) Render du feedback -->
+      </turbo-frame>
+      <div class="d-none d-flex justify-content-center align-items-center" data-toggle-target="welldone">
+         <%= image_tag "thumbsup.png" , style: "width: 300px;" %>
+      </div>
     </div>
-    <p>Temps écoulé: <span data-counter-target="display">0:00</span></p>
   </div>
-
-  <!-- 3) FEEDBACK HIDDEN INITIALLY -->
-  <turbo-frame id="feedback_content">
-    
-      <!-- 4) Render du feedback -->
-
-  </turbo-frame>
 </div>
 <div class="bottom-buttons d-flex">
   <div class="button-right flex-grow-1 bg-yellow-theme">

@@ -1,48 +1,40 @@
 <form action="<%= sessions_path %>" method="post" data-controller="session">
   <div class="container-100 d-flex flex-column justify-content-between">
     <div>
-
-    <div class="text-center py-1">
-      <h1 style="color: black" class="display-5 display-md-4 fw-bold">Select your playlist</h1>
-    </div>
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-
-  <!-- Playlist sélectionnée -->
-  <input type="hidden" name="session[playlist_id]" data-session-target="hiddenPlaylist">
-
-  <!-- Nombre de chansons -->
-  <input type="hidden" name="session[number_of_questions]" data-session-target="hiddenCount">
-
-<!-- Titre et compteur centrés -->
-<div class="text-center mb-4">
-  <!-- Titre comme H1 centré -->
-  <div class="fs-5 mb-2">Number of songs</div>
-
-  <!-- Compteur centré sous le titre -->
-  <div class="d-inline-flex align-items-center gap-3">
-    <button type="button" data-action="click->session#decrement" class="btn btn-outline-secondary btn-lg">-</button>
-    <span data-session-target="value" class="fs-2 fw-bold">5</span>
-    <button type="button" data-action="click->session#increment" class="btn btn-outline-secondary btn-lg">+</button>
-  </div>
-</div>
-
-    </div>
-  <!-- Grille de playlists -->
-  <div class="row g-2 mb-2">
-    <% @playlists.each do |playlist| %>
-      <div class="col-4">
-        <input type="radio" name="playlist_radio" id="playlist_<%= playlist.id %>" value="<%= playlist.id %>" class="d-none" data-session-target="playlist" data-action="change->session#select">
-        <label for="playlist_<%= playlist.id %>" class="btn btn-select bg-orange-theme w-100 py-4 fw-bold fs-6">
-          <%= playlist.title %>
-        </label>
+      <div class="text-center py-1">
+        <h1 style="color: black" class="display-5 display-md-4 fw-bold">Select your playlist</h1>
       </div>
-    <% end %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <!-- Playlist sélectionnée -->
+      <input type="hidden" name="session[playlist_id]" data-session-target="hiddenPlaylist">
+      <!-- Nombre de chansons -->
+      <input type="hidden" name="session[number_of_questions]" data-session-target="hiddenCount">
+      <!-- Titre et compteur centrés -->
+      <div class="text-center mb-4">
+        <!-- Titre comme H1 centré -->
+        <div class="fs-5 mb-2">Number of songs</div>
+        <!-- Compteur centré sous le titre -->
+        <div class="d-inline-flex align-items-center gap-3">
+          <button type="button" data-action="click->session#decrement" class="btn btn-outline-secondary btn-lg">-</button>
+          <span data-session-target="value" class="fs-2 fw-bold">5</span>
+          <button type="button" data-action="click->session#increment" class="btn btn-outline-secondary btn-lg">+</button>
+        </div>
+      </div>
+    </div>
+    <!-- Grille de playlists -->
+    <div class="row g-2 mb-2">
+      <% @playlists.each do |playlist| %>
+        <div class="col-4">
+          <input type="radio" name="playlist_radio" id="playlist_<%= playlist.id %>" value="<%= playlist.id %>" class="d-none" data-session-target="playlist" data-action="change->session#select">
+          <label for="playlist_<%= playlist.id %>" class="btn btn-select bg-orange-theme w-100 py-4 fw-bold fs-6">
+            <%= playlist.title %>
+          </label>
+        </div>
+      <% end %>
+    </div>
+    <!-- Bouton Create Session -->
   </div>
-
-  <!-- Bouton Create Session -->
   <div class="bottom-buttons d-flex">
     <button type="submit" class="button-right flex-grow-1 bg-yellow-theme">Create session</button>
-  </div>
-  </div>
   </div>
 </form>

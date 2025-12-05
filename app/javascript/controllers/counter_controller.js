@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="counter"
 export default class extends Controller {
-  static targets = ["display", "input"]
+  static targets = ["input"]
 
   // Lancement du temps à la connection et initialisation du elapsed
   connect() {
@@ -16,7 +16,6 @@ export default class extends Controller {
   startStopwatch() {
     this.timer = setInterval(() => {
       this.elapsed = Date.now() - this.startTime
-      this.displayTarget.textContent = this.formatTime(this.elapsed)
     }, 1000);
   }
 
