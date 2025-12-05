@@ -64,8 +64,12 @@ a {
 
 //bootstrap edit
 
-.btn:hover {
+.btn-select:hover {
   background-color: #9D4EDD;
   color: white;
-  border: none;
+  border-color: #9D4EDD;
+}
+
+body {
+  overflow: hidden;
 }

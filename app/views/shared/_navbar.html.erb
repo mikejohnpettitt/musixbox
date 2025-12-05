@@ -6,7 +6,7 @@
 
     <% if user_signed_in? %>
       <div class="d-flex align-items-center">
-        <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item my-logout fw-bold" %>
+        <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item my-logout" %>
         <%= link_to "#", class:"avatar ms-2" do %>
           <%= image_tag "person.svg", class: "p-2 bg-yellow-theme rounded-circle", alt: "dropdown menu" %>
         <% end %>

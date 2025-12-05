@@ -1,10 +1,10 @@
-  <!-- En-tête du titre -->
-  <div class="container-100">
-
-  <div class="text-center py-1">
-    <h1 style="color: black" class="display-5 display-md-4 fw-bold">Select your playlist</h1>
-  </div>
 <form action="<%= sessions_path %>" method="post" data-controller="session">
+  <div class="container-100 d-flex flex-column justify-content-between">
+    <div>
+
+    <div class="text-center py-1">
+      <h1 style="color: black" class="display-5 display-md-4 fw-bold">Select your playlist</h1>
+    </div>
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
 
   <!-- Playlist sélectionnée -->
@@ -26,12 +26,13 @@
   </div>
 </div>
 
+    </div>
   <!-- Grille de playlists -->
   <div class="row g-2 mb-2">
     <% @playlists.each do |playlist| %>
       <div class="col-4">
         <input type="radio" name="playlist_radio" id="playlist_<%= playlist.id %>" value="<%= playlist.id %>" class="d-none" data-session-target="playlist" data-action="change->session#select">
-        <label for="playlist_<%= playlist.id %>" class="btn bg-orange-theme w-100 py-4 fw-bold fs-6">
+        <label for="playlist_<%= playlist.id %>" class="btn btn-select bg-orange-theme w-100 py-4 fw-bold fs-6">
           <%= playlist.title %>
         </label>
       </div>
@@ -42,6 +43,6 @@
   <div class="bottom-buttons d-flex">
     <button type="submit" class="button-right flex-grow-1 bg-yellow-theme">Create session</button>
   </div>
-</form>
-
   </div>
+  </div>
+</form>
