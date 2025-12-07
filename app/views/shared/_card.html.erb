@@ -1,6 +1,6 @@
 <div class="card-result text-center mt-5" style="position: relative; width: 100%; margin-bottom: 0;">
   <!-- Image de fond -->
-  <img src="<%= asset_path('and_the_winner_is.png') %>"  style="width: 100%; display: block; opacity: 0.7;">
+  <img src="<%= asset_path('and_the_winner_is.png') %>" alt="photos" style="width: 100%; display: block; opacity: 0.7;">
 
   <!-- Ta photo prise (remplace le fond) -->
   <img id="userPhoto" data-camera-target="cardPhoto" alt="Votre photo"
@@ -26,4 +26,54 @@
     </div>
 
   </div>
+<%# ============================================ %>
+<%# SCRIPT : Charger la photo depuis localStorage %>
+<%# ============================================ %>
+<script>
+  // Fonction qui charge la photo
+  function loadUserPhoto() {
+    console.log("Script de chargement photo exécuté !")
+    
+    // On récupère la photo depuis localStorage
+    const savedPhoto = localStorage.getItem("userSelfie")
+    
+    console.log("Photo trouvée:", savedPhoto ? "OUI" : "NON")
+    
+    // On récupère les éléments HTML
+    const userPhotoElement = document.getElementById("userPhoto")
+    const backgroundImage = document.querySelector(".card-result > img:first-child")
+    
+    console.log("Element userPhoto:", userPhotoElement ? "OUI" : "NON")
+    console.log("Element background:", backgroundImage ? "OUI" : "NON")
+    
+    // Si une photo existe dans localStorage
+    if (savedPhoto && userPhotoElement) {
+      
+      // On met la photo sauvegardée dans l'élément <img>
+      userPhotoElement.src = savedPhoto
+      
+      // On affiche la photo de l'utilisateur
+      userPhotoElement.style.display = "block"
+      
+      // On cache l'image de fond
+      if (backgroundImage) {
+        backgroundImage.style.opacity = "0"
+      }
+      
+      console.log("Photo chargée avec succès !")
+      
+    } else {
+      console.log("Pas de photo ou élément non trouvé")
+    }
+  }
+  
+  // ============================================
+  // IMPORTANT : Écouter les DEUX événements
+  // ============================================
+  // "DOMContentLoaded" = premier chargement de la page
+  // "turbo:load" = navigation avec Turbo (Rails 7)
+  
+  document.addEventListener("DOMContentLoaded", loadUserPhoto)
+  document.addEventListener("turbo:load", loadUserPhoto)
+</script>
 </div>

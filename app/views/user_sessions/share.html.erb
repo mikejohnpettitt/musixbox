@@ -1,8 +1,9 @@
 <%# app/views/play_sessions/share.html.erb %>
 <% content_for :meta_title, "result" %>
 <% content_for :meta_description, "description" %>
-<div class="container" style="max-width: 375px; padding: 0 20px; margin: 0 auto;"
-data-controller="camera">
+<div class="container" style="max-width: 375px; padding: 0 20px; margin: 0 auto; padding-top: 30px;"
+data-controller="camera"
+data-card-url="<%= share_card_play_session_path(@user_session) %>">
   <%# ZONE CAMÉRA (visible seulement pendant la capture) %>
   <div class="camera-area mb-4">
     <%# Élément vidéo pour afficher la caméra (caché au début) %>
@@ -12,7 +13,7 @@ data-controller="camera">
       style="display: none; width: 100%; border-radius: 8px;">
     </video>
     <%# Prévisualisation de la photo (cachée au début) %>
-    <img data-camera-target="preview" alt=""
+    <img data-camera-target="preview" alt="preview"
       style="display: none; width: 100%; border-radius: 8px;">
   </div>
 
@@ -23,12 +24,14 @@ data-controller="camera">
 
   <%# BOUTONS CAMÉRA %>
   <div class="d-grid gap-2 mb-3">
-    <%# Bouton Démarrer la caméra %>
-    <button type="button"
-      class="btn btn-primary"
-      data-action="click->camera#startCamera">
-      📷 Démarrer caméra
-    </button>
+   <%# Bouton Démarrer caméra - CACHÉ car démarrage auto %>
+<%# On le garde dans le code au cas où, mais on le cache %>
+  <button type="button"
+    class="btn btn-primary"
+    style="display: none;"
+    data-action="click->camera#startCamera">
+  📷 Démarrer caméra
+  </button>
     <%# Bouton Prendre photo (caché au début) %>
     <button type="button"
       class="btn btn-success"
@@ -43,6 +46,15 @@ data-controller="camera">
       data-action="click->camera#retakePhoto">
       🔄 Reprendre
     </button>
+    <%# ============================================ %>
+<%# NOUVEAU : Bouton pour voir la card (caché au début) %>
+<%# ============================================ %>
+<button type="button"
+  class="btn btn-success btn-lg"
+  style="display: none;"
+  data-action="click->camera#goToCard">
+  ✨ Voir ma card
+</button>
   </div>
 
   <%# ZONE CARD (cachée au début, visible après photo) %>
@@ -52,17 +64,5 @@ data-controller="camera">
     <%= render "shared/card" %>
   </div>
 
-  <%# BOUTONS ACTION (avec link_to) %>
-  <div class="d-grid gap-2">
-    <button type="button"
-      class="btn btn-warning"
-      data-action="click->camera#downloadPhoto">
-      💾 Save to phone
-    </button>
-    <button type="button"
-      class="btn btn-info"
-      data-action="click->camera#shareToInstagram">
-      📤 Share to Instagram
-    </button>
-  </div>
+ 
 </div>

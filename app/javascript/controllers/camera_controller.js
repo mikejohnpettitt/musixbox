@@ -32,36 +32,40 @@ export default class extends Controller {
   // ============================================
   // Cette méthode est appelée quand on clique sur "Démarrer caméra"
   // "async" = la fonction peut attendre des résultats asynchrones (comme l'accès à la caméra)
-  async startCamera(event) {
-    // event.preventDefault() = empêche le comportement par défaut du bouton
-    event.preventDefault()
+  // ============================================
+// MÉTHODE STIMULUS SPÉCIALE : CONNEXION
+// ============================================
+// "connect()" est appelée AUTOMATIQUEMENT par Stimulus 
+// quand le contrôleur est chargé (= quand la page s'affiche)
+connect() {
+  // On démarre la caméra automatiquement !
+  this.autoStartCamera()
+}
+
+// ============================================
+// MÉTHODE : DÉMARRAGE AUTOMATIQUE DE LA CAMÉRA
+// ============================================
+async autoStartCamera() {
+  try {
+    // On demande l'accès à la caméra
+    this.stream = await navigator.mediaDevices.getUserMedia({ video: true })
     
-    // "try/catch" = on essaie quelque chose, et si ça échoue, on gère l'erreur
-    try {
-      // On demande l'accès à la caméra de l'utilisateur
-      // "await" = on attend que la caméra soit accessible avant de continuer
-      // "{ video: true }" = on veut juste la vidéo, pas l'audio
-      this.stream = await navigator.mediaDevices.getUserMedia({ video: true })
-      
-      // On affecte le flux vidéo à l'élément <video> HTML
-      // Ça va afficher la caméra dans la vidéo
-      this.videoTarget.srcObject = this.stream
-      
-      // On affiche l'élément vidéo (il était caché au départ avec display: none)
-      this.videoTarget.style.display = "block"
-      
-      // On affiche les boutons "Prendre photo" et "Reprendre"
-      this.showButton("capturePhoto")
-      this.showButton("retakePhoto")
-      
-      // Message dans la console (pour déboguer)
-      console.log("Caméra démarrée !")
-      
-    } catch (error) {
-      // Si une erreur se produit (ex: caméra refusée), on affiche une alerte
-      alert("Erreur caméra: " + error.message)
-    }
+    // On affecte le flux vidéo à l'élément <video>
+    this.videoTarget.srcObject = this.stream
+    
+    // On affiche la vidéo
+    this.videoTarget.style.display = "block"
+    
+    // On affiche les boutons "Prendre photo" et "Reprendre"
+    this.showButton("capturePhoto")
+    this.showButton("retakePhoto")
+    
+    console.log("Caméra démarrée automatiquement !")
+    
+  } catch (error) {
+    alert("Erreur caméra: " + error.message)
   }
+}
 
   // ============================================
   // MÉTHODE 2 : PRENDRE UNE PHOTO
@@ -100,20 +104,36 @@ export default class extends Controller {
     // On cache le bouton "Prendre photo"
     this.hideButton("capturePhoto")
     
-    // On affiche la card avec les résultats
-    this.cardWrapperTarget.style.display = "block"
-    
-    // On met la photo dans l'image de la card
-    this.cardPhotoTarget.src = photoData
-    
-    // On affiche la photo dans la card
-    this.cardPhotoTarget.style.display = "block"
+  // ============================================
+// NOUVEAU : On affiche juste l'aperçu (pas la card)
+// ============================================
+// On affiche la photo dans le preview (pas dans la card)
+this.previewTarget.src = photoData
+this.previewTarget.style.display = "block"
+
+// On NE montre PAS la card ici (elle sera dans share_card.html.erb)
+// this.cardWrapperTarget.style.display = "block"  // ← COMMENTÉ !
+
+// On affiche le bouton "Voir ma card"
+this.showButton("goToCard")
     
     // On stocke la photo pour pouvoir la télécharger plus tard
     this.photoData = photoData
+
+    // ============================================
+    // NOUVEAU : Sauvegarder dans localStorage
+    // ============================================
+    // localStorage = mémoire du navigateur qui persiste entre les pages
+    // "setItem" = on met une valeur dans cette mémoire
+    // "userSelfie" = le nom/clé pour retrouver notre photo
+    // photoData = la photo en base64
+    localStorage.setItem("userSelfie", photoData)
+    console.log("Photo sauvegardée dans localStorage !")
     
     // Message dans la console
     console.log("Photo prise !")
+    // On affiche le bouton "Voir ma card"
+    this.showButton("goToCard")
   }
 
   // ============================================
@@ -236,6 +256,30 @@ export default class extends Controller {
     // On supprime le lien du body (nettoyage)
     document.body.removeChild(link)
   }
+
+  // ============================================
+// MÉTHODE 6 : ALLER VOIR LA CARD
+// ============================================
+// Cette méthode est appelée quand on clique sur "Voir ma card"
+goToCard(event) {
+  event.preventDefault()
+  
+  // On vérifie qu'on a bien une photo
+  if (!this.photoData) {
+    alert("Pas de photo à afficher")
+    return
+  }
+  
+  // La photo est déjà sauvegardée dans localStorage (fait dans capturePhoto)
+  // Donc on redirige simplement vers la page share_card
+  
+  // window.location.href = change la page actuelle
+  // On utilise le chemin Rails vers share_card
+  // REMPLACE l'URL ci-dessous par ton vrai chemin !
+  window.location.href = this.element.dataset.cardUrl
+  
+  console.log("Redirection vers la card !")
+}
 
   // ============================================
   // MÉTHODE 5 : PARTAGER SUR INSTAGRAM

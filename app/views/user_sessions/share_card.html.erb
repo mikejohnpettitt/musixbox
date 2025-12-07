@@ -3,6 +3,8 @@
   <title>Share Card - MusixBox</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <!-- Bibliothèque pour capturer la card en image -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     /* UNIQUEMENT pour cacher les éléments inutiles */
     header, footer, nav, .navbar { display: none !important; }
@@ -21,35 +23,77 @@
 
         <%= render "shared/card" %>
 
-         <!-- BOUTON SIMPLE POUR PARTAGE -->
-        <div class="text-center mt-4">
+        <!-- BOUTONS PARTAGE ET SAUVEGARDE -->
+        <div class="d-flex gap-2 mt-4 justify-content-center">
+          <button onclick="savePhoto()" class="btn btn-warning btn-lg">
+            💾 Sauvegarder
+          </button>
           <button onclick="shareResults()" class="btn btn-primary btn-lg">
-            📤 Partager mes résultats
+            📤 Partager
           </button>
         </div>
-
 
       </div> 
 
     </div>
   </div>
- <script>
+
+  <script>
+    // ============================================
+    // FONCTION 1 : Partager les résultats
+    // ============================================
     function shareResults() {
-      // Action simple de partage
       if (navigator.share) {
-        // Partager sur mobile
         navigator.share({
           title: 'Mes résultats MusixBox',
           text: 'J\'ai terminé ma session sur MusixBox ! 🎵',
           url: window.location.href
         });
       } else {
-        // Copier le lien sur desktop
         navigator.clipboard.writeText(window.location.href)
           .then(() => alert('Lien copié ! Collez-le pour partager.'));
       }
     }
+    
+    // ============================================
+    // FONCTION 2 : Sauvegarder la card complète
+    // ============================================
+    // Cette fonction capture la card (photo + textes) en une seule image
+    function savePhoto() {
+      // On récupère l'élément card-result (la card avec photo + textes)
+      const cardElement = document.querySelector(".card-result")
+      
+      if (!cardElement) {
+        alert("Pas de card à sauvegarder")
+        return
+      }
+      
+      // html2canvas capture l'élément HTML comme une image
+      // C'est comme faire une capture d'écran d'un élément précis
+      html2canvas(cardElement, {
+        useCORS: true,           // Pour les images externes
+        allowTaint: true,        // Permet les images locales
+        backgroundColor: null,   // Fond transparent
+        scale: 2                 // Qualité x2 pour une meilleure résolution
+      }).then(function(canvas) {
+        // On convertit le canvas en image PNG
+        const imageData = canvas.toDataURL("image/png")
+        
+        // On crée un lien invisible pour télécharger
+        const link = document.createElement("a")
+        link.href = imageData
+        link.download = `musixbox_${Date.now()}.png`
+        
+        // On simule un clic pour télécharger
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        
+      }).catch(function(error) {
+        console.error("Erreur de capture:", error)
+        alert("Erreur lors de la sauvegarde")
+      })
+    }
   </script>
-
 
 </body>
