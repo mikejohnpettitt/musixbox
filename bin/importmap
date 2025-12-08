@@ -2,3 +2,5 @@
 
 require_relative "../config/application"
 require "importmap/commands"
+pin "application"
+pin "@rails/actioncable", to: "actioncable.esm.js"
