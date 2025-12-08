@@ -2,38 +2,43 @@
 <div class="container-100 d-flex flex-column">
 
   <div class="flex-grow-1 overflow-auto p-3">
-    <h1>Your results</h1>
-    <h2><%= @score %>/<%= @max_score %></h2>
-    <h2><%= @percentage %>%</h2>
-    <% if @percentage > 80 %>
-      <h3 class="text-center">Ace of <%= @playlist.title %>!</h3>
-      <p class="text-center mb-0">Perfect score!</p>
-    <% end %>
 
-    <% if @fastest_response %>
-      <h3>Your fastest response</h3>
-      <p>Time: <%= @fastest_response.time_taken / 1000%> seconds</p>
-      <p>Song: <%= @fastest_response.song.title %></p>
-    <% end %>
 
-    <% if @fastest_title %>
-      <h3>Titre trouvé le plus vite :</h3>
-      <p>Temps : <%= @fastest_title.time_taken / 1000 %> secondes</p>
-      <p>Votre réponse : <%= @fastest_title.user_answer_title %></p>
-    <% else %>
-      <p>No correct title</p>
-    <% end %>
+      <h1 class="text-center mb-4">Your results</h1>
+      <div class="text-center mb-5">
+        <div class="display-1 fw-bold"  style="color: #9352D6;"><%= @percentage %>%</div>
+        <div class="fs-5 text-muted">
+          <span class="fw-semibold"><%= @score %></span> correct answers out of  <%= @max_score %>
+        </div>
+      </div>
 
-    <%  %>
+
+
+
+
+
+      <% if @percentage > 80 %>
+        <div class="border border-warning border-4 rounded-4 p-4 bg-warning-subtle">
+          <h3 class="text-center text-warning fw-bolder display-5">🏆 Ace of <%= @playlist.title %> 🏆</h3>
+
+          <%# Affiche "Perfect score!" seulement si 100% %>
+          <% if @percentage == 100 %>
+            <p class="text-warning fw-bold fs-4">Perfect score!</p>
+          <% end %>
+        </div>
+      <% end %>
+
+
 
   </div>
 </div>
+
   <div class="bottom-buttons d-flex container-15">
     <%= link_to share_card_play_session_path(@user_session),
-              class: "button-left flex-grow-1 bg-orange-theme" do %>
+              class: "button-left w-50 bg-orange-theme" do %>
     Share results
     <% end %>
-    <%= link_to play_session_results_share_path(@user_session), class: "button-right flex-grow-1 bg-yellow-theme" do %>
+    <%= link_to play_session_results_share_path(@user_session), class: "button-right w-50 bg-yellow-theme" do %>
       Add selfie
     <% end %>
   </div>
