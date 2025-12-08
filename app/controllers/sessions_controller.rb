@@ -16,10 +16,13 @@ class SessionsController < ApplicationController
         # this only applies to Quickplay for now
         group: Group.create
       )
-      # raise
       # needed to rename as "user_session_path" conflicts with devise
       # redirect_to user_session_path(@user_session)
-      redirect_to play_session_path(@user_session)
+      if params[:mode] == "quickplay"
+        redirect_to play_session_path(@user_session)
+      else
+        redirect_to group_path(@user_session.group_id)
+      end
 
     else
       @playlists = Playlist.all

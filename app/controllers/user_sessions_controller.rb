@@ -1,10 +1,8 @@
 class UserSessionsController < ApplicationController
 
-
-
-
   def show
-    @user_session = current_or_guest_user.user_sessions.find(params[:id])
+    # @user_session = current_or_guest_user.user_sessions.find(params[:id])
+    @user_session = UserSession.find(params[:id])
     @playlist = @user_session.session.playlist
     if params[:current_question].present?
       @current_question = Question.find(params[:current_question])

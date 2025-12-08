@@ -5,6 +5,7 @@
         <h1 style="color: black" class="display-5 display-md-4 fw-bold">Select your playlist</h1>
       </div>
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= hidden_field_tag :mode, params[:mode] %>
       <!-- Playlist sélectionnée -->
       <input type="hidden" name="session[playlist_id]" data-session-target="hiddenPlaylist">
       <!-- Nombre de chansons -->
@@ -35,6 +36,6 @@
     <!-- Bouton Create Session -->
   </div>
   <div class="bottom-buttons d-flex">
-    <button type="submit" class="button-right flex-grow-1 bg-yellow-theme">Create session</button>
+    <button type="submit" class="button-right flex-grow-1 bg-yellow-theme", >Create session</button>
   </div>
 </form>
