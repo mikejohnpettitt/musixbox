@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import consumer from "channels/consumer.js"
+import consumer from "channels/consumer"
 
 // Connects to data-controller="lobby"
 export default class extends Controller {
