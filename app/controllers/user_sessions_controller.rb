@@ -1,5 +1,8 @@
 class UserSessionsController < ApplicationController
 
+
+
+
   def show
     # @user_session = current_or_guest_user.user_sessions.find(params[:id])
     @user_session = UserSession.find(params[:id])
@@ -19,9 +22,11 @@ class UserSessionsController < ApplicationController
       # then shuffles it
       # then takes just the n entries, where n = number selected
       # then for each on this array, creates a new song using the value in the array as the number on the playlist
-      array = (0..Song.where(playlist_id: @playlist.id).count-1).to_a.shuffle.first(@user_session.session.number_of_questions)
-      array.each do |song|
-        Question.create(session_id: @user_session.session_id, song: Song.where(playlist_id: @playlist.id)[song])
+      if Question.where(session_id: @user_session.session_id).count == 0
+        array = (0..Song.where(playlist_id: @playlist.id).count-1).to_a.shuffle.first(@user_session.session.number_of_questions)
+        array.each do |song|
+          Question.create(session_id: @user_session.session_id, song: Song.where(playlist_id: @playlist.id)[song])
+        end
       end
       @current_question = Question.where(session_id: @user_session.session_id).first
     end
