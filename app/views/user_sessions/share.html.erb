@@ -40,17 +40,17 @@ data-card-url="<%= share_card_play_session_path(@user_session) %>">
       📸 Prendre photo
     </button>
     <%# Bouton Reprendre (caché au début) %>
-    <button type="button"
-      class="btn btn-warning"
-      style="display: none;"
-      data-action="click->camera#retakePhoto">
-      🔄 Reprendre
-    </button>
+   <button type="button"
+  class="btn btn-warning"
+  style="display: none;"
+  data-action="click->camera#retakePhoto">
+  🔄 Reprendre
+</button>
     <%# ============================================ %>
 <%# NOUVEAU : Bouton pour voir la card (caché au début) %>
 <%# ============================================ %>
 <button type="button"
-  class="btn btn-success btn-lg"
+  class="btn btn-success"
   style="display: none;"
   data-action="click->camera#goToCard">
   ✨ Voir ma card
