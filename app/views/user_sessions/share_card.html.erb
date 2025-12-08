@@ -6,29 +6,29 @@
   <!-- Bibliothèque pour capturer la card en image -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
-    /* UNIQUEMENT pour cacher les éléments inutiles */
-    header, footer, nav, .navbar { display: none !important; }
-
     /* Pour impression/screenshot propre */
     @media print {
       .no-print { display: none !important; }
     }
   </style>
 </head>
-<body class="bg-gradient d-flex align-items-center min-vh-100">
+<body class="bg-gradient min-vh-100">
 
-  <div class="container">
-    <div class="row justify-content-center">
+  <!-- NAVBAR -->
+  <%= render "shared/navbar" %>
+
+  <div class="container d-flex align-items-center" style="min-height: calc(100vh - 80px);">
+    <div class="row justify-content-center w-100">
       <div class="col-12 col-md-8 col-lg-6">
 
         <%= render "shared/card" %>
 
         <!-- BOUTONS PARTAGE ET SAUVEGARDE -->
-        <div class="d-flex gap-2 mt-4 justify-content-center">
-          <button onclick="savePhoto()" class="btn btn-warning btn-lg">
+        <div class="d-flex gap-2 mt-4 justify-content-center no-print">
+          <button onclick="savePhoto()" class="btn btn-warning btn-lg w-100">
             💾 Sauvegarder
           </button>
-          <button onclick="shareResults()" class="btn btn-primary btn-lg">
+          <button onclick="shareResults()" class="btn btn-success btn-lg w-100">
             📤 Partager
           </button>
         </div>
