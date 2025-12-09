@@ -10,6 +10,14 @@ class GroupsController < ApplicationController
     # Load connected users for the lobby
     connected_user_ids = Rails.cache.fetch("lobby_#{@group.id}_users") { [] }
     @connected_users = User.where(id: connected_user_ids)
+
+    # generate a qrcode
+    @content = "https://musixbox.games/groups/#{@group.id}"
+    @qr_svg = RQRCode::QRCode.new(@content).as_svg(
+      module_size: 6,
+      use_path: true
+    )
+
   end
 
   def start

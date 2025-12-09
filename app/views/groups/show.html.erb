@@ -4,25 +4,23 @@ data-controller="lobby"
 data-lobby-group-id-value="<%= @group.id %>"
 data-lobby-user-id-value="<%= current_or_guest_user.id %>"
 data-lobby-start-url-value="<%= play_session_path(@user_session) %>"
-
 >
-
-<h1>Lobby <%= @group.id %></h1>
-<!--<div> <%#= current_or_guest_user.id  %></div>
--->
-
-<!--Connected players are displayed here-->
-<div id="players">
-  <% @connected_users.each do |user| %>
-    <%= render 'players', user: user %>
-  <% end %>
-</div>
-
-<button
+  <div class="container d-flex justify-content-center align-items-center flex-column">
+    <h1>Lobby <%= @group.id %></h1>
+    <%= raw(@qr_svg.html_safe) %>
+    <p class="fw-bold"><%= @content %></p>
+    <!--Connected players are displayed here-->
+    <div id="players">
+      <% @connected_users.each do |user| %>
+        <%= render 'players', user: user %>
+      <% end %>
+    </div>
+    <button
   type="button"
   class="btn btn-primary"
   data-action="click->lobby#start"
->
-  Start game
-</button>
+      >
+      Start game
+    </button>
+  </div>
 </div>
