@@ -75,7 +75,10 @@ Question: <%#= @current_question.id %>-->
   </div>
 </div>
 <div class="bottom-buttons d-flex">
-  <div class="button-right flex-grow-1 bg-yellow-theme">
-    <%= link_to "Next >", play_session_path(@user_session, current_question: @current_question) %>
-  </div>
+
+<%= link_to play_session_path(@user_session, current_question: @current_question),
+            class: "button-center flex-grow-1 bg-yellow-theme" do %>
+  Next >
+<% end %>
+
 </div>

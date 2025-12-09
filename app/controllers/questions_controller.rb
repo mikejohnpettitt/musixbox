@@ -14,8 +14,8 @@ class QuestionsController < ApplicationController
       @accuracy_title = jarow.getDistance(@question.user_answer_title.downcase, @question.song.title.downcase)
       @accuracy_artist = jarow.getDistance(@question.user_answer_artist.downcase, @question.song.artist.downcase)
 
-      @accuracy_artist >= 0.95 ? @question.successful_artist = 1 : @question.successful_artist = 0
-      @accuracy_title >= 0.95 ? @question.successful_title = 1 : @question.successful_title = 0
+      @accuracy_artist >= 0.85 ? @question.successful_artist = 1 : @question.successful_artist = 0
+      @accuracy_title >= 0.85 ? @question.successful_title = 1 : @question.successful_title = 0
       @question.save
       render partial: "feedback_content", locals: {question: @question}
     else
