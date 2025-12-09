@@ -1,0 +1,11 @@
+// _base.scss - Global Neo Brutalism base styles
+@import "variables";
+
+* {
+  font-family: $font-family;
+}
+
+body {
+  -webkit-tap-highlight-color: transparent;
+  background: $bg;
+}

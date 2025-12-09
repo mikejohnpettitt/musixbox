@@ -3,6 +3,7 @@
   <title>Share Card - MusixBox</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
   <!-- Bibliothèque pour capturer la card en image -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
@@ -25,11 +26,11 @@
 
         <!-- BOUTONS PARTAGE ET SAUVEGARDE -->
         <div class="d-flex gap-2 mt-4 justify-content-center no-print">
-          <button onclick="savePhoto()" class="btn btn-warning btn-lg w-100">
-            💾 Sauvegarder
+          <button onclick="savePhoto()" class="btn btn-lg w-50" style="background: #FACC15 !important; border: 3px solid #1a1a1a !important; box-shadow: 4px 4px 0 #1a1a1a !important; font-weight: 700 !important; font-family: 'Space Grotesk', sans-serif !important;">
+            💾 Save
           </button>
-          <button onclick="shareResults()" class="btn btn-success btn-lg w-100">
-            📤 Partager
+          <button onclick="shareResults()" class="btn btn-lg w-50" style="background: #F97316 !important; border: 3px solid #1a1a1a !important; box-shadow: 4px 4px 0 #1a1a1a !important; font-weight: 700 !important; color: white !important; font-family: 'Space Grotesk', sans-serif !important;">
+            📤 Share
           </button>
         </div>
 

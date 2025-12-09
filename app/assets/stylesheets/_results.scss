@@ -1,0 +1,187 @@
+// _results.scss - Neo Brutalism styles for results page
+@import "variables";
+
+// Background
+.bg-results {
+  background: $bg;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: calc(5rem + env(safe-area-inset-top, 0px));
+}
+
+// Score card
+.score-card {
+  background: $orange;
+  border: 3px solid $black;
+  border-radius: 12px;
+  padding: 1.5rem 3rem;
+  text-align: center;
+}
+
+.score-percentage {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.score-text {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+}
+
+// Trophy card
+.trophy-card {
+  background: $yellow;
+  border: 3px solid $black;
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 $black;
+  padding: 1rem;
+  text-align: center;
+}
+
+.trophy-title {
+  font-weight: 700;
+  color: $black;
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.trophy-perfect {
+  font-weight: 700;
+  color: $black;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+// Fastest guess card
+.fastest-card {
+  background: white;
+  border: 3px solid $black;
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 $black;
+  padding: 1rem;
+}
+
+.fastest-label {
+  font-weight: 700;
+  color: $black;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.fastest-time {
+  font-weight: 700;
+  color: $orange;
+  font-size: 1.5rem;
+}
+
+.fastest-song {
+  font-weight: 600;
+  color: $black;
+  font-size: 0.85rem;
+}
+
+// Buttons
+.btn-share {
+  background: $orange;
+  color: white;
+  border: 3px solid $black;
+  box-shadow: 5px 5px 0 $black;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+
+  &:hover {
+    color: white;
+  }
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 $black;
+  }
+}
+
+.btn-selfie {
+  background: $yellow;
+  color: $black;
+  border: 3px solid $black;
+  box-shadow: 5px 5px 0 $black;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: block;
+  text-align: center;
+
+  &:hover {
+    color: $black;
+  }
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 $black;
+  }
+}
+
+// Decorative shapes
+.shape-1, .shape-2, .shape-3 {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .score-percentage {
+    font-size: 3rem;
+  }
+
+  .shape-1 {
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: $yellow;
+    border: 3px solid $black;
+    border-radius: 12px;
+    top: 15%;
+    right: 5%;
+    transform: rotate(15deg);
+    z-index: 0;
+  }
+
+  .shape-2 {
+    display: block;
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: $orange;
+    border: 3px solid $black;
+    border-radius: 50%;
+    bottom: 25%;
+    left: 5%;
+    z-index: 0;
+  }
+
+  .shape-3 {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: $yellow;
+    border: 3px solid $black;
+    top: 40%;
+    left: 8%;
+    transform: rotate(-10deg);
+    z-index: 0;
+  }
+}

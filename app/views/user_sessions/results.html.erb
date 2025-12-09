@@ -1,52 +1,53 @@
+<div class="bg-results position-relative overflow-hidden d-flex flex-column px-3 py-4">
 
-<div class="container-100 d-flex flex-column">
+  <div class="shape-1"></div>
+  <div class="shape-2"></div>
+  <div class="shape-3"></div>
 
-  <div class="flex-grow-1 overflow-auto p-3">
+  <!-- Title -->
+  <header class="text-center mb-4 position-relative" style="z-index: 1;">
+    <h1 class="page-title mb-0">Your Results</h1>
+  </header>
 
-
-      <h1 class="text-center mb-4">Your results</h1>
-      <div class="text-center mb-5">
-        <div class="display-1 fw-bold"  style="color: #9352D6;"><%= @percentage %>%</div>
-        <div class="fs-5 text-muted">
-          <span class="fw-semibold"><%= @score %></span> correct answers out of  <%= @max_score %>
-        </div>
-      </div>
-
-
-      <% if @percentage > 80 %>
-        <div class="border border-warning border-4 rounded-4 p-4 bg-warning-subtle">
-          <h3 class="text-center text-warning fw-bolder display-5">🏆 Ace of <%= @playlist.title %> 🏆</h3>
-
-          <%# Affiche "Perfect score!" seulement si 100% %>
-          <% if @percentage == 100 %>
-            <p class="text-warning fw-bold fs-4">Perfect score!</p>
-          <% end %>
-        </div>
-      <% end %>
-
-
-    <% if @fastest_title %>
-    <div class="mt-3">
-      <h5 style="font-size: 2rem;">🎯 fastest guess : </h5>
-      <p style="font-size: 2rem;">
-        <%= (@fastest_title.time_taken / 1000.0).round(2) %> sec
-        <% if @fastest_title.song %>
-          - <%= @fastest_title.song.title %>
-        <% end %>
-      </p>
+  <!-- Score Card -->
+  <div class="d-flex justify-content-center mb-4 position-relative" style="z-index: 1;">
+    <div class="score-card">
+      <div class="score-percentage"><%= @percentage %>%</div>
+      <div class="score-text"><%= @score %> / <%= @max_score %></div>
     </div>
-    <% end %>
-
-
   </div>
+
+  <!-- Trophy Card (if > 80%) -->
+  <% if @percentage > 80 %>
+    <div class="trophy-card mb-3 position-relative" style="z-index: 1;">
+      <h3 class="trophy-title">🏆 Ace of <%= @playlist.title %> 🏆</h3>
+      <% if @percentage == 100 %>
+        <p class="trophy-perfect">Perfect score!</p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Fastest Guess -->
+  <% if @fastest_title %>
+    <div class="fastest-card mb-4 position-relative" style="z-index: 1;">
+      <div class="fastest-label">🎯 Fastest guess</div>
+      <div class="fastest-time"><%= (@fastest_title.time_taken / 1000.0).round(2) %> sec</div>
+      <% if @fastest_title.song %>
+        <div class="fastest-song"><%= @fastest_title.song.title %></div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Buttons -->
+  <div class="mt-auto position-relative" style="z-index: 1;">
+    <div class="d-flex gap-3">
+      <%= link_to share_card_play_session_path(@user_session), class: "btn-share flex-grow-1" do %>
+        Share results
+      <% end %>
+      <%= link_to play_session_results_share_path(@user_session), class: "btn-selfie flex-grow-1" do %>
+        Add selfie
+      <% end %>
+    </div>
+  </div>
+
 </div>
-
-  <div class="bottom-buttons d-flex container-15">
-    <%= link_to share_card_play_session_path(@user_session),
-              class: "button-left w-50 bg-orange-theme" do %>
-    Share results
-    <% end %>
-    <%= link_to play_session_results_share_path(@user_session), class: "button-right w-50 bg-yellow-theme" do %>
-      Add selfie
-    <% end %>
-  </div>

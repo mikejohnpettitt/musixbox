@@ -1,0 +1,209 @@
+// _show.scss - Neo Brutalism styles for show/play page
+@import "variables";
+
+// Background
+.bg-show {
+  background: $bg;
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow: hidden;
+  padding-top: calc(2rem + env(safe-area-inset-top, 0px));
+}
+
+// Video container - STICKY
+.video-sticky {
+  position: sticky;
+  top: 2rem;
+  z-index: 10;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  background: $bg;
+}
+
+// Progress bar - DANS la vidéo
+#progress_bar {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 60 !important;
+  background: transparent;
+  padding: 0;
+}
+
+.progress-brutal {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid $black;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-brutal-fill {
+  background: $orange;
+  height: 100%;
+}
+
+.progress-brutal-empty {
+  background: rgba(255, 255, 255, 0.3);
+  height: 100%;
+}
+
+.progress-text {
+  color: $black;
+  font-weight: 700;
+  font-size: 0.7rem;
+  text-shadow: 0 0 3px white, 0 0 3px white;
+}
+
+// Feedback - taille automatique selon contenu
+.feedback-over {
+  position: absolute;
+  top: 3rem;
+  left: 0.5rem;
+  z-index: 100 !important;
+  background: white;
+  border: 2px solid $black;
+  border-radius: 10px;
+  box-shadow: 3px 3px 0 $black;
+  padding: 0.8rem;
+  text-align: center;
+  min-width: 100px;
+  max-width: 200px;
+  width: auto;
+  height: auto;
+
+  h2 {
+    font-weight: 700;
+    color: $black;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+  }
+
+  div {
+    font-weight: 600;
+    color: $black;
+    margin-bottom: 0.1rem;
+    font-size: 0.8rem;
+    word-wrap: break-word;
+    white-space: normal;
+  }
+
+  &[data-success="true"] {
+    background: #d4edda;
+  }
+
+  &[data-success="false"] {
+    background: #fff3cd;
+  }
+}
+
+// Contenu sous la vidéo
+.content-below {
+  padding: 0.5rem;
+  margin-top: 1rem;
+}
+
+// Buzzer
+.buzzer {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: $orange;
+  border: 4px solid $black;
+  box-shadow: 6px 6px 0 $black;
+  transition: all 0.15s ease;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 $black;
+  }
+}
+
+// Form
+.form-title {
+  font-weight: 700;
+  color: $black;
+  font-size: 1.25rem;
+}
+
+.form-input {
+  background: white;
+  border: 3px solid $black;
+  border-radius: 10px;
+  padding: 0.6rem 0.8rem;
+  font-weight: 500;
+  color: $black;
+  width: 100%;
+  box-shadow: 3px 3px 0 $black;
+  font-size: 0.9rem;
+
+  &:focus {
+    outline: none;
+    border-color: $orange;
+  }
+}
+
+.btn-go {
+  background: $orange;
+  color: white;
+  border: 3px solid $black;
+  box-shadow: 4px 4px 0 $black;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 0.6rem 1.5rem;
+  border-radius: 10px;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 $black;
+  }
+}
+
+// Next button
+.btn-next {
+  background: $yellow;
+  color: $black;
+  border: 3px solid $black;
+  box-shadow: 4px 4px 0 $black;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 $black;
+  }
+}
+
+// Thumbs up image
+.welldone-img {
+  max-width: 150px;
+}
+
+// Desktop
+@media (min-width: 500px) {
+  .buzzer {
+    width: 180px;
+    height: 180px;
+  }
+
+  .feedback-over {
+    width: 130px;
+    height: 130px;
+
+    h2 {
+      font-size: 0.85rem;
+    }
+
+    div {
+      font-size: 0.7rem;
+      max-width: 115px;
+    }
+  }
+}

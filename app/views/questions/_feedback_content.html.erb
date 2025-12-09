@@ -1,13 +1,17 @@
 <turbo-frame id="feedback_content">
-  <div class="feedback-over" data-toggle-target="feedback" data-success="<%= question.successful_title && question.successful_artist %>">
+  <div class="position-absolute feedback-over" data-toggle-target="feedback" data-success="<%= question.successful_title && question.successful_artist %>">
     <% if question.successful_title && question.successful_artist %>
-      <h2>🎉 Correct!</h2>
-      <div>Artist: <%= question.song.artist %> ✅</div>
-      <div>Title: <%= question.song.title %> ✅</div>
+      <div class="d-block">
+        <h2>Correct!</h2>
+        <div>Artist: <%= question.song.artist %> ✅</div>
+        <div>Title: <%= question.song.title %> ✅</div>
+      </div>
     <% else %>
-      <h2>💪 Keep going!</h2>
-      <div>Artist: <%= question.successful_artist ? "#{question.song.artist} ✅" : "#{question.user_answer_artist} ❌" %></div>
-      <div>Title: <%= question.successful_title ? "#{question.song.title} ✅" : "#{question.user_answer_title} ❌" %></div>
+      <div class="d-block">
+        <h2>Keep going!</h2>
+        <div>Artist: <%= question.successful_artist ? "#{question.song.artist} ✅" : "#{question.user_answer_artist} ❌" %></div>
+        <div>Title: <%= question.successful_title ? "#{question.song.title} ✅" : "#{question.user_answer_title} ❌" %></div>
+      </div>
     <% end %>
   </div>
 </turbo-frame>
