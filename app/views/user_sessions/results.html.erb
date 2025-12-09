@@ -4,9 +4,9 @@
   <div class="flex-grow-1 overflow-auto p-3">
 
 
-      <h1 class="text-center mb-4">Your results</h1>
-      <div class="text-center mb-5">
-        <div class="display-1 fw-bold"  style="color: #9352D6;"><%= @percentage %>%</div>
+      <h1 class="text-center mb-3">Your results</h1>
+      <div class="text-center mb-3">
+        <div class="purple-theme display-1 fw-bold"><%= @percentage %>%</div>
         <div class="fs-5 text-muted">
           <span class="fw-semibold"><%= @score %></span> correct answers out of  <%= @max_score %>
         </div>
@@ -14,25 +14,29 @@
 
 
       <% if @percentage > 80 %>
-        <div class="border border-warning border-4 rounded-4 p-4 bg-warning-subtle">
-          <h3 class="text-center text-warning fw-bolder display-5">🏆 Ace of <%= @playlist.title %> 🏆</h3>
+        <div class="border border-warning border-4 rounded-4 p-3 bg-warning-subtle">
+          <h2 class="text-center text-warning fw-bolder">🏆 Achievement unlocked 🏆</h2>
+          <h3 class="text-center fw-bolder display-4">Ace of <%= @playlist.title %></h3>
 
           <%# Affiche "Perfect score!" seulement si 100% %>
           <% if @percentage == 100 %>
-            <p class="text-warning fw-bold fs-4">Perfect score!</p>
+            <p class="text-warning text-center fs-4">Perfect score!</p>
           <% end %>
         </div>
       <% end %>
 
 
     <% if @fastest_title %>
-    <div class="mt-3">
-      <h5 style="font-size: 2rem;">🎯 fastest guess : </h5>
-      <p style="font-size: 2rem;">
-        <%= (@fastest_title.time_taken / 1000.0).round(2) %> sec
+    <div class="mt-3 text-center">
+      <h2>Fastest guess: </h5>
+      <p class="display-6">
         <% if @fastest_title.song %>
+          <%= @fastest_title.song.artist %>
           - <%= @fastest_title.song.title %>
         <% end %>
+      </p>
+      <p class="fst-italic">
+        - guessed in <%= (@fastest_title.time_taken / 1000.0).round(2) %> sec
       </p>
     </div>
     <% end %>
