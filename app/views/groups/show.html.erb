@@ -11,6 +11,9 @@ data-lobby-user-id-value="<%= current_or_guest_user.id %>"
 -->
 </div>
 
+<!--Connected players are displayed here-->
 <div id="players">
-<!--Players are displayed here-->
+  <% @connected_users.each do |user| %>
+    <%= render 'players', user: user %>
+  <% end %>
 </div>

@@ -6,5 +6,9 @@ class GroupsController < ApplicationController
     else
      @user_session = UserSession.find(params[:id])
     end
+
+    # Load connected users for the lobby
+    connected_user_ids = Rails.cache.fetch("lobby_#{@group.id}_users") { [] }
+    @connected_users = User.where(id: connected_user_ids)
   end
 end
