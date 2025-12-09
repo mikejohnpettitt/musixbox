@@ -11,8 +11,11 @@ data-lobby-start-url-value="<%= play_session_path(@user_session) %>"
 <!--<div> <%#= current_or_guest_user.id  %></div>
 -->
 
+<!--Connected players are displayed here-->
 <div id="players">
-<!--Players are displayed here-->
+  <% @connected_users.each do |user| %>
+    <%= render 'players', user: user %>
+  <% end %>
 </div>
 
 <button
