@@ -42,10 +42,7 @@ data-lobby-session-path-value="<%= play_session_path(@user_session) %>">
               <%= image_tag "Logo sans nom 2.png" , style: "width: 140px;" %>
             </div>
           </div>
-          <div class="mb-3">
-            <%= f.input :user_answer_title, placeholder: "Title", label: false, input_html: { class: "form-input" } %>
-          </div>
-          <%= f.submit "Go!", class: "btn-go" %>
+
         <% end %>
       </div>
       <!-- Message when someone else is answering -->
