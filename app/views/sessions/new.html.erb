@@ -1,41 +1,187 @@
+<%= content_for :head do %>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #F97316;
+    --secondary: #FACC15;
+    --accent: #F97316;
+    --orange: #F97316;
+    --yellow: #FACC15;
+    --bg: #FFF7ED;
+    --black: #1a1a1a;
+  }
+
+  * {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  body {
+    -webkit-tap-highlight-color: transparent;
+    background: var(--bg);
+  }
+
+  .bg-session {
+    background: var(--bg);
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
+  }
+
+  .page-title {
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: -0.02em;
+    font-size: 1.75rem;
+  }
+
+  .section-title {
+    font-weight: 600;
+    color: var(--black);
+    font-size: 1.1rem;
+  }
+
+  .counter-btn {
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: 3px solid var(--black);
+    box-shadow: 4px 4px 0 var(--black);
+    transition: all 0.15s ease;
+  }
+
+  .counter-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--black);
+  }
+
+  .counter-value {
+    min-width: 60px;
+  }
+
+  .playlist-card {
+    background: var(--orange);
+    border: 3px solid var(--black);
+    box-shadow: 4px 4px 0 var(--black);
+    transition: all 0.15s ease;
+    cursor: pointer;
+    color: white;
+  }
+
+  .playlist-card:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--black);
+  }
+
+  input[type="radio"]:checked + .playlist-card {
+    background: var(--yellow);
+    color: var(--black);
+  }
+
+  .btn-submit {
+    background: var(--yellow);
+    color: var(--black);
+    border: 3px solid var(--black);
+    box-shadow: 5px 5px 0 var(--black);
+    transition: all 0.15s ease;
+    max-width: 320px;
+  }
+
+  .btn-submit:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 var(--black);
+  }
+
+  .shape-1, .shape-2, .shape-3 {
+    display: none;
+  }
+
+  @media (min-width: 500px) {
+    .shape-1 {
+      display: block;
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: var(--yellow);
+      border: 3px solid var(--black);
+      border-radius: 12px;
+      top: 15%;
+      left: 5%;
+      transform: rotate(15deg);
+      z-index: 0;
+    }
+
+    .shape-2 {
+      display: block;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: var(--orange);
+      border: 3px solid var(--black);
+      border-radius: 50%;
+      top: 20%;
+      right: 8%;
+      z-index: 0;
+    }
+
+    .shape-3 {
+      display: block;
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: var(--yellow);
+      border: 3px solid var(--black);
+      bottom: 15%;
+      left: 8%;
+      transform: rotate(-10deg);
+      z-index: 0;
+    }
+  }
+
+  @media (min-width: 428px) {
+    .page-title { font-size: 2rem; }
+  }
+</style>
+<% end %>
+
 <form action="<%= sessions_path %>" method="post" data-controller="session">
-  <div class="container-100 d-flex flex-column justify-content-between">
-    <div>
-      <div class="text-center py-1">
-        <h1 style="color: black" class="display-5 display-md-4 fw-bold">Select your playlist</h1>
-      </div>
-      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-      <%= hidden_field_tag :mode, params[:mode] %>
-      <!-- Playlist sélectionnée -->
-      <input type="hidden" name="session[playlist_id]" data-session-target="hiddenPlaylist">
-      <!-- Nombre de chansons -->
-      <input type="hidden" name="session[number_of_questions]" data-session-target="hiddenCount">
-      <!-- Titre et compteur centrés -->
-      <div class="text-center mb-4">
-        <!-- Titre comme H1 centré -->
-        <div class="fs-5 mb-2">Number of songs</div>
-        <!-- Compteur centré sous le titre -->
-        <div class="d-inline-flex align-items-center gap-3">
-          <button type="button" data-action="click->session#decrement" class="btn btn-outline-secondary btn-lg">-</button>
-          <span data-session-target="value" class="fs-2 fw-bold">5</span>
-          <button type="button" data-action="click->session#increment" class="btn btn-outline-secondary btn-lg">+</button>
-        </div>
+  <div class="bg-session position-relative overflow-hidden d-flex flex-column px-3 py-4">
+    
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="shape-3"></div>
+
+    <header class="text-center mb-4 position-relative" style="z-index: 1;">
+      <h1 class="page-title mb-0">Select your playlist</h1>
+    </header>
+
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <%= hidden_field_tag :mode, params[:mode] %>
+    <input type="hidden" name="session[playlist_id]" data-session-target="hiddenPlaylist">
+    <input type="hidden" name="session[number_of_questions]" data-session-target="hiddenCount">
+
+    <div class="text-center mb-4 position-relative" style="z-index: 1;">
+      <div class="section-title mb-3">Number of songs</div>
+      <div class="d-inline-flex align-items-center gap-3">
+        <button type="button" data-action="click->session#decrement" class="counter-btn rounded-3 fw-bold fs-4 text-dark">−</button>
+        <span data-session-target="value" class="counter-value text-center fw-bold fs-2 text-dark">5</span>
+        <button type="button" data-action="click->session#increment" class="counter-btn rounded-3 fw-bold fs-4 text-dark">+</button>
       </div>
     </div>
-    <!-- Grille de playlists -->
-    <div class="row g-2 mb-2">
+
+    <div class="row g-3 mb-4 flex-grow-1 position-relative" style="z-index: 1;">
       <% @playlists.each do |playlist| %>
-        <div class="col-4">
+        <div class="col-6 col-md-4">
           <input type="radio" name="playlist_radio" id="playlist_<%= playlist.id %>" value="<%= playlist.id %>" class="d-none" data-session-target="playlist" data-action="change->session#select">
-          <label for="playlist_<%= playlist.id %>" class="btn btn-select bg-orange-theme w-100 py-4 fw-bold fs-6">
+          <label for="playlist_<%= playlist.id %>" class="playlist-card d-block w-100 py-4 rounded-3 text-center fw-bold">
             <%= playlist.title %>
           </label>
         </div>
       <% end %>
     </div>
-    <!-- Bouton Create Session -->
-  </div>
-  <div class="bottom-buttons d-flex">
-    <button type="submit" class="button-right flex-grow-1 bg-yellow-theme", >Create session</button>
+
+    <div class="d-flex justify-content-center mt-auto pb-3 position-relative" style="z-index: 1;">
+      <button type="submit" class="btn-submit w-100 py-3 rounded-3 text-uppercase fw-bold">Create session</button>
+    </div>
+
   </div>
 </form>
