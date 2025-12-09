@@ -1,59 +1,46 @@
-<% questions = Question.where(session_id: @user_session.session_id).order(:id) %> 
-<% total_questions = questions.count %>
-<% current_index = questions.find_index { |q| q.id == @current_question.id }.to_i + 1 %>
-
-<div class="bg-show" data-controller="youtube toggle">
-
-  <!-- Video STICKY avec progress bar et feedback PAR-DESSUS -->
-  <div class="video-sticky position-relative">
-    
-    <!-- Progress bar SUR la vidéo -->
-    <div id="progress_bar">
-      <div class="d-flex gap-1 mb-1">
-        <% (1..total_questions).each do |i| %>
-          <div class="progress-brutal flex-grow-1">
-            <% if i <= current_index %>
-              <div class="progress-brutal-fill"></div>
-            <% else %>
-              <div class="progress-brutal-empty"></div>
-            <% end %>
-          </div>
-        <% end %>
+<div class="container-100 d-flex flex-column justify-content-between position-relative"
+data-controller="lobby"
+data-lobby-user-id-value="<%= current_or_guest_user.id %>"
+data-lobby-group-id-value="<%= @user_session.group.id %>"
+data-lobby-start-url-value="<%= play_session_path(@user_session) %>"
+data-lobby-session-path-value="<%= play_session_path(@user_session) %>">
+>
+  <div class="doudou" data-controller="youtube toggle">
+    <div class="container-30">
+      <% questions = Question.where(session_id: @user_session.session_id).order(:id) %>
+      <% total_questions = questions.count %>
+      <% current_index = questions.find_index { |q| q.id == @current_question.id }.to_i + 1 %>
+      <!-- MODIFICATION ICI : on ajoute id="progress_bar" -->
+      <div id="progress_bar">
+        <div class="d-flex gap-1 px-3 py-2">
+          <% (1..total_questions).each do |i| %>
+            <div class="progress flex-grow-1" style="height: 4px;">
+              <% if i <= current_index %>
+                <div class="progress-bar bg-warning" style="width: 100%;"></div>
+              <% else %>
+                <div class="progress-bar bg-secondary opacity-25" style="width: 100%;"></div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="text-center text-white-50 small mb-2">
+          <span><%= current_index %> / <%= total_questions %></span>
+        </div>
       </div>
-      
-    </div>
-
-    <!-- Feedback SUR la vidéo -->
-    <turbo-frame id="feedback_content">
-    </turbo-frame>
-
-    <!-- Video -->
-    <%= turbo_frame_tag "question" do %>
-      <%= render "questions/video", question: @current_question %>
-    <% end %>
-  </div>
-
-  <!-- Contenu SOUS la vidéo (scrollable) -->
-  <div class="content-below d-flex flex-column align-items-center">
-
-    <!-- Buzzer -->
-    <div class="py-3">
-      <%= link_to "#", data: { action: "click->youtube#pause click->toggle#buzz" }, class: "text-decoration-none" do %>
-        <div class="buzzer d-flex justify-content-center align-items-center" data-toggle-target="buzzer">
-          <%= image_tag "Logo sans nom 2.png", style: "width: 80px;" %>
+      <%= turbo_frame_tag "question" do %>
+        <div>
+          <%= render "questions/video" , question: @current_question %>
         </div>
       <% end %>
     </div>
 
-    <!-- Form -->
-    <div data-controller="counter" class="w-100" style="max-width: 320px;">
-      <div data-toggle-target="form" class="d-none text-center py-3">
-        <h2 class="form-title mb-3">Take your guess!</h2>
-        <%= simple_form_for @current_question, data: {
-                        action: "submit->counter#saveTime turbo:submit-end->toggle#submitted" } do |f| %>
-          <%= f.hidden_field :time_taken, data: { counter_target: "input" } %>
-          <div class="mb-2">
-            <%= f.input :user_answer_artist, placeholder: "Artist", label: false, input_html: { class: "form-input" } %>
+    <div class="container-45">
+      <div class="d-flex justify-content-center align-items-center flex-grow-1">
+        <%= link_to "#" , data: { action: "click->toggle#buzz click->lobby#buzzerPressed click->lobby#pauseVideo" } do %>
+          <div class="buzzer d-flex justify-content-center align-items-center bg-orange-theme" data-toggle-target="buzzer">
+            <div>
+              <%= image_tag "Logo sans nom 2.png" , style: "width: 140px;" %>
+            </div>
           </div>
           <div class="mb-3">
             <%= f.input :user_answer_title, placeholder: "Title", label: false, input_html: { class: "form-input" } %>
@@ -61,21 +48,35 @@
           <%= f.submit "Go!", class: "btn-go" %>
         <% end %>
       </div>
-    </div>
+      <!-- Message when someone else is answering -->
+<div id="buzzer-message" class="d-none text-center">
+  <!-- Will be filled by JavaScript -->
+</div>
+<div data-controller="counter" class="container">
+  <div data-toggle-target="form" class="d-none">
+    <h1>Take your guess!</h1>
+    <%= simple_form_for @current_question, data: {
+                          action: "submit->counter#saveTime turbo:submit-end->toggle#submitted" } do |f| %>
+      <%= f.hidden_field :time_taken, data: { counter_target: "input" } %>
+      <%= f.input :user_answer_artist, placeholder: "Artist", label_html: { class: "sr-only" } %>
+      <%= f.input :user_answer_title, placeholder: "Title", label_html: { class: "sr-only" } %>
+      <%= f.submit "Go!" %>
+    <% end %>
+  </div>
+</div>
+<turbo-frame id="feedback_content">
+</turbo-frame>
+<div class="d-none d-flex justify-content-center align-items-center" data-toggle-target="welldone">
+  <%= image_tag "thumbsup.png" , style:"width: 300px;" %>
+</div>
 
-    <!-- Well done -->
-    <div class="d-none d-flex justify-content-center align-items-center py-3" data-toggle-target="welldone">
-      <%= image_tag "thumbsup.png", class: "welldone-img" %>
     </div>
-
-    <!-- Next button -->
-    <div class="w-100 py-3" style="max-width: 320px;">
+    <div class="bottom-buttons d-flex">
       <%= link_to play_session_path(@user_session, current_question: @current_question),
-                  class: "btn-next d-block w-100 py-3 rounded-3 text-center text-decoration-none" do %>
-        Next →
+            class: "button-center flex-grow-1 bg-yellow-theme",
+            data: { action: "click->lobby#goToNext" } do %>
+        Next >
       <% end %>
     </div>
-
   </div>
-
 </div>

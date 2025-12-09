@@ -3,23 +3,11 @@
   <title>Share Card - MusixBox</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <!-- Bibliothèque pour capturer la card en image -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <style>
-    /* Pour impression/screenshot propre */
-    @media print {
-      .no-print { display: none !important; }
-    }
-  </style>
 </head>
-<body class="bg-gradient min-vh-100">
+<body>
 
-  <!-- NAVBAR -->
-  <%= render "shared/navbar" %>
-
-  <div class="container d-flex align-items-center" style="min-height: calc(100vh - 80px);">
-    <div class="row justify-content-center w-100">
+  <div class="container-100 d-flex align-items-center p-2">
+    <div class="justify-content-center w-100">
       <div class="col-12 col-md-8 col-lg-6">
 
         <%= render "shared/card" %>
@@ -34,67 +22,17 @@
           </button>
         </div>
 
-      </div> 
+<div class="bottom-buttons d-flex no-print">
+  <%= button_tag "Save",
+      type: "button",
+      class: "button-left flex-grow-1 bg-orange-theme w-50",
+      onclick: "savePhoto()" %>
 
-    </div>
-  </div>
+  <%= button_tag "Share results",
+      type: "button",
+      class: "button-right flex-grow-1 bg-yellow-theme w-50",
+      onclick: "shareResults()" %>
 
-  <script>
-    // ============================================
-    // FONCTION 1 : Partager les résultats
-    // ============================================
-    function shareResults() {
-      if (navigator.share) {
-        navigator.share({
-          title: 'Mes résultats MusixBox',
-          text: 'J\'ai terminé ma session sur MusixBox ! 🎵',
-          url: window.location.href
-        });
-      } else {
-        navigator.clipboard.writeText(window.location.href)
-          .then(() => alert('Lien copié ! Collez-le pour partager.'));
-      }
-    }
-    
-    // ============================================
-    // FONCTION 2 : Sauvegarder la card complète
-    // ============================================
-    // Cette fonction capture la card (photo + textes) en une seule image
-    function savePhoto() {
-      // On récupère l'élément card-result (la card avec photo + textes)
-      const cardElement = document.querySelector(".card-result")
-      
-      if (!cardElement) {
-        alert("Pas de card à sauvegarder")
-        return
-      }
-      
-      // html2canvas capture l'élément HTML comme une image
-      // C'est comme faire une capture d'écran d'un élément précis
-      html2canvas(cardElement, {
-        useCORS: true,           // Pour les images externes
-        allowTaint: true,        // Permet les images locales
-        backgroundColor: null,   // Fond transparent
-        scale: 2                 // Qualité x2 pour une meilleure résolution
-      }).then(function(canvas) {
-        // On convertit le canvas en image PNG
-        const imageData = canvas.toDataURL("image/png")
-        
-        // On crée un lien invisible pour télécharger
-        const link = document.createElement("a")
-        link.href = imageData
-        link.download = `musixbox_${Date.now()}.png`
-        
-        // On simule un clic pour télécharger
-        document.body.appendChild(link)
-        link.click()
-        document.body.removeChild(link)
-        
-      }).catch(function(error) {
-        console.error("Erreur de capture:", error)
-        alert("Erreur lors de la sauvegarde")
-      })
-    }
-  </script>
+</div>
 
 </body>

@@ -57,7 +57,7 @@ playlist_blues = [
   {playlist: playlist_blues,title: "At Last", artist:"Etta James",                                 youtube_url: "https://www.youtube.com/embed/S-cbOl96RFM?si=OazqA5aaivbbNti4"},
   {playlist: playlist_blues,title: "Everyday I have The Blues", artist:"B.B king ",                youtube_url: "https://www.youtube.com/embed/xtwUqXCQvAI?si=xN9nEIhY1E_2FLcp"},
   {playlist: playlist_blues,title: "Stay Around A little Longer", artist:"Buddy Guy",              youtube_url: "https://www.youtube.com/embed/emyt-agLE_s?si=l1_-4blKAOKAnqb3"},
-  {playlist: playlist_blues,title: " Little Walter My Babe", artist:"Little Walter",               youtube_url: "https://www.youtube.com/embed/duRp_avXtMM?si=jzwEXmAXyevkIRA-"},
+  {playlist: playlist_blues,title: "My Babe", artist:"Little Walter",                              youtube_url: "https://www.youtube.com/embed/duRp_avXtMM?si=jzwEXmAXyevkIRA-"},
   {playlist: playlist_blues,title: "Going Down", artist:"Freddie King",                            youtube_url: "https://www.youtube.com/embed/V_ONyukSLqA?si=DS31uq-bt71SqFpd"},
   {playlist: playlist_blues,title: "Yes We Can Can", artist:"Allen Toussaint",                     youtube_url: "https://www.youtube.com/embed/xV7F-JwTx_U?si=yTU3A031r3albsJK"}
 ]
@@ -86,7 +86,7 @@ Song.create!(
     {playlist: playlist_punk, title: "All the Small Things",      artist: "blink-182",           youtube_url: "https://www.youtube.com/embed/9Ht5RZpzPqw?si=pM9YxDOIr1j5IiV1"},
     {playlist: playlist_punk, title: "Self Esteem",               artist: "The Offspring",       youtube_url: "https://www.youtube.com/embed/EtNZnhxWLHo?si=tXrGv-rhndurQmIu"},
     {playlist: playlist_punk, title: "American Idiot",            artist: "Green Day",           youtube_url: "https://www.youtube.com/embed/Ee_uujKuJMI?si=o3vgBxdLnNxH2-4_"},
-    {playlist: playlist_punk, title: "What's My Age Again?",      artist: "blink-182",           youtube_url: "https://www.youtube.com/embed/k1BFHYtZlAU?si=o3kF0zGsNM_e6ppV"},
+    {playlist: playlist_punk, title: "Stay together for the kids",artist: "blink-182",           youtube_url: "https://www.youtube.com/embed/k1BFHYtZlAU?si=o3kF0zGsNM_e6ppV"},
     {playlist: playlist_punk, title: "Linoleum",                  artist: "NOFX",                youtube_url: "https://www.youtube.com/embed/d9ORimXBXLw?si=Wl-ZU0UnNv3ow013"},
     {playlist: playlist_punk, title: "Time Bomb",                 artist: "Rancid",              youtube_url: "https://www.youtube.com/embed/LxaA9_mzOz4?si=Yb5ZDK3H9dxdB4E0"},
     {playlist: playlist_punk, title: "Anarchy in the U.K.",       artist: "Sex Pistols",         youtube_url: "https://www.youtube.com/embed/qbmWs6Jf5dc?si=2q6_4VtY4UsKxZAb"},

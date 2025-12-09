@@ -52,6 +52,8 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "solid_cable"
 gem "inline_svg"
+gem "rqrcode", "~> 3.0"
+
 
 group :development, :test do
   gem "dotenv-rails"

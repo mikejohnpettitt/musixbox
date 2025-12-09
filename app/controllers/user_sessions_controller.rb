@@ -62,7 +62,7 @@ class UserSessionsController < ApplicationController
       @fastest_title = nil
     end
 
-    render layout: false
+    # render layout: false
   end
 
 

@@ -86,3 +86,8 @@ a {
 // body {
 //   overflow: hidden;
 // }
+
+//added for share card
+  @media print {
+    .no-print { display: none !important; }
+  }
