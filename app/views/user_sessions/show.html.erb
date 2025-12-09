@@ -1,47 +1,38 @@
-<!--<h1>Gameplay</h1>
-User id: <%#= @user_session.user_id %><br>
-Session id: <%#= @user_session.session_id %><br>
-Playlist: <%#= Session.find(@user_session.session_id).playlist.title %>
-Question: <%#= @current_question.id %>-->
-
-
 <div class="container-100 d-flex flex-column justify-content-between position-relative">
   <div class="doudou" data-controller="youtube toggle">
     <div class="container-30">
-      <%# ==================== BARRE DE PROGRESSION STYLE INSTAGRAM ==================== %>
-      <% questions = Question.where(session_id: @user_session.session_id) %>
-<% total_questions = questions.count %>
-<% current_index = questions.find_index { |q| q.id == @current_question.id }.to_i + 1 %>
 
-<%# Conteneur flex avec petits espaces entre chaque segment %>
-<div class="d-flex gap-1 px-3 py-2">
-  <% (1..total_questions).each do |i| %>
-    <div class="progress flex-grow-1" style="height: 4px;">
-      <% if i <= current_index %>
-        <%# Musique passée ou en cours = barre pleine %>
-        <div class="progress-bar bg-warning" style="width: 100%;"></div>
-      <% else %>
-        <%# Musique pas encore jouée = vide %>
-        <div class="progress-bar bg-secondary opacity-25" style="width: 100%;"></div>
-      <% end %>
-    </div>
-  <% end %>
-</div>
+      <% questions = Question.where(session_id: @user_session.session_id).order(:id) %> 
+      <% total_questions = questions.count %>
+      <% current_index = questions.find_index { |q| q.id == @current_question.id }.to_i + 1 %>
 
-<%# Indicateur texte "3/10" %>
-<div class="text-center text-white-50 small mb-2">
-  <span><%= current_index %> / <%= total_questions %></span>
-</div>
-<%# ==================== FIN BARRE DE PROGRESSION ==================== %>
+      <!-- MODIFICATION ICI : on ajoute id="progress_bar" -->
+      <div id="progress_bar">
+        <div class="d-flex gap-1 px-3 py-2">
+          <% (1..total_questions).each do |i| %>
+            <div class="progress flex-grow-1" style="height: 4px;">
+              <% if i <= current_index %>
+                <div class="progress-bar bg-warning" style="width: 100%;"></div>
+              <% else %>
+                <div class="progress-bar bg-secondary opacity-25" style="width: 100%;"></div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        <div class="text-center text-white-50 small mb-2">
+          <span><%= current_index %> / <%= total_questions %></span>
+        </div>
+      </div>
+
       <%= turbo_frame_tag "question" do %>
         <div>
           <%= render "questions/video" , question: @current_question %>
         </div>
       <% end %>
     </div>
+
     <div class="container-45">
       <div class="d-flex justify-content-center align-items-center flex-grow-1">
-        <!-- 1) BUZZER VISIBLE FIRST -->
         <%= link_to "#" , data: { action: "click->youtube#pause click->toggle#buzz" } do %>
           <div class="buzzer d-flex justify-content-center align-items-center bg-orange-theme" data-toggle-target="buzzer">
             <div>
@@ -50,13 +41,12 @@ Question: <%#= @current_question.id %>-->
           </div>
         <% end %>
       </div>
-      <!-- 2) FORM HIDDEN INITIALLY -->
+
       <div data-controller="counter" class="container">
         <div data-toggle-target="form" class="d-none">
           <h1>Take your guess!</h1>
           <%= simple_form_for @current_question, data: {
-                          action: "submit->counter#saveTime turbo:submit-end->toggle#submitted" ,
-                          turbo_frame: "feedback_content" } do |f| %>
+                          action: "submit->counter#saveTime turbo:submit-end->toggle#submitted" } do |f| %>
             <%= f.hidden_field :time_taken, data: { counter_target: "input" } %>
             <%= f.input :user_answer_artist, placeholder: "Artist", label_html: { class: "sr-only" } %>
             <%= f.input :user_answer_title, placeholder: "Title", label_html: { class: "sr-only" } %>
@@ -64,16 +54,17 @@ Question: <%#= @current_question.id %>-->
           <% end %>
         </div>
       </div>
-      <!-- 3) FEEDBACK HIDDEN INITIALLY -->
+
       <turbo-frame id="feedback_content">
-        <!-- 4) Render du feedback -->
       </turbo-frame>
+
       <div class="d-none d-flex justify-content-center align-items-center" data-toggle-target="welldone">
          <%= image_tag "thumbsup.png" , style:"width: 300px;" %>
       </div>
     </div>
   </div>
 </div>
+
 <div class="bottom-buttons d-flex">
   <div class="button-right flex-grow-1 bg-yellow-theme">
     <%= link_to "Next >", play_session_path(@user_session, current_question: @current_question) %>

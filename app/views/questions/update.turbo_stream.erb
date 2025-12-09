@@ -1,0 +1,28 @@
+<%# Ce fichier met à jour 2 zones en même temps : la barre de progression ET le feedback %>
+
+<%# 1. Mettre à jour la BARRE DE PROGRESSION %>
+<%= turbo_stream.replace "progress_bar" do %>
+  <div id="progress_bar">
+    <div class="d-flex gap-1 px-3 py-2">
+      <% (1..@total_questions).each do |i| %>
+        <div class="progress flex-grow-1" style="height: 4px;">
+          <% if i <= @current_index %>
+            <div class="progress-bar bg-warning" style="width: 100%;"></div>
+          <% else %>
+            <div class="progress-bar bg-secondary opacity-25" style="width: 100%;"></div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="text-center text-white-50 small mb-2">
+      <span><%= @current_index %> / <%= @total_questions %></span>
+    </div>
+  </div>
+<% end %>
+
+<%# 2. Mettre à jour le FEEDBACK %>
+<%= turbo_stream.replace "feedback_content" do %>
+  <turbo-frame id="feedback_content">
+    <%= render "feedback_content", question: @question %>
+  </turbo-frame>
+<% end %>
