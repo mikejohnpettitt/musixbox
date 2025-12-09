@@ -1,13 +1,23 @@
+// Neo Brutalism YouTube container
+
 .yt-container {
   position: relative;
-  width: 100vw;
-//   height: 315px;
-// }
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16/9;
+  border: 3px solid #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 5px 5px 0 #1a1a1a;
+  overflow: hidden;
+  background: #1a1a1a;
+  z-index: 1 !important;
 }
-// .yt-player {
-//   width: 100%;
-//   height: 100%;
-// }
+
+.yt-player {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
 
 .blur-overlay {
   position: absolute;
@@ -15,7 +25,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-
   backdrop-filter: blur(40px);
-  pointer-events: none; /* user can still click UI, diable or enable when wanted */
+  -webkit-backdrop-filter: blur(40px);
+  background: rgba(0,0,0,0.2);
+  pointer-events: none;
+  z-index: 2;
 }

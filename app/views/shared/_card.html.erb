@@ -1,106 +1,56 @@
-<div class="card-result w-100">
+<div class="card-result text-center">
   <!-- Image de fond -->
-  <img id="defaultPhoto" src="<%= asset_path('and_the_winner_is.png') %>" alt="photos">
+  <img class="card-image" src="<%= asset_path('and_the_winner_is.png') %>" alt="photos">
 
-  <!-- Ta photo prise (remplace le fond) -->
-  <img id="userPhoto" data-camera-target="cardPhoto" alt="Votre photo">
+  <!-- Photo utilisateur -->
+  <img id="userPhoto" data-camera-target="cardPhoto" alt="Your photo">
 
-  <!-- Texte et overlay avec TES STATS -->
+  <!-- Overlay avec stats -->
+  <div class="card-overlay">
 
-  <div class="stats-container d-flex flex-column justify-content-between">
-
-    <!-- affichage des stats -->
-    <div class="stats-top mt-1 d-flex justify-content-between align-items-left">
-      <h5 class="small">MusixBox 🥊</h5>
-      <h5 class="small text-muted">MusixBox.games</h5>
+    <% if @percentage > 80 %>
+      <div class="trophy-card">
+        <h3 class="trophy-title">🏆 Ace of <%= @playlist.title %> 🏆</h3>
+        <% if @percentage == 100 %>
+          <p class="trophy-perfect">Perfect score!</p>
+        <% end %>
+      </div>
     </div>
+    <% end %>
 
     <% if @fastest_title %>
-    <div>
-      <h3>Score</h3>
-      <div>
-        <div>The <%= @playlist.title  %> Playlist: <%= @percentage %>% </div>
-
+      <div class="fastest-card">
+        <div class="fastest-label">🎯 Fastest guess</div>
+        <div class="fastest-time"><%= (@fastest_title.time_taken / 1000.0).round(2) %> sec</div>
+        <% if @fastest_title.song %>
+          <div class="fastest-song"><%= @fastest_title.song.title %></div>
+        <% end %>
       </div>
-
-    <div class="mt-3">
-      <h3>Fastest guess</h5>
-      <div class="fs-6">
-          <% if @fastest_title.song %>
-            <%= @fastest_title.song.artist %>- <%= @fastest_title.song.title %>
-          <% end %>
-          <span class="small">
-        <%= (@fastest_title.time_taken / 1000.0).round(2) %>s
-          </span>
-      </div>
-    </div>
     <% end %>
 
-
-    <% if @percentage> 80 %>
-    <div class="rounded-4 py-2 w-100 mx-auto">
-      <h3 class="fw-bolder display-8 mb-1">Ace of <%= @playlist.title %> 🏆</h3>
-      <%# Affiche "Perfect score!" seulement si 100% %>
-        <% if @percentage==100 %>
-          <p class="fw-bold fs-6 mb-0">Perfect score!</p>
-          <% end %>
+    <div class="card-footer">
+      <span>🎸 MusixBox</span>
+      <span>musixbox.com</span>
     </div>
-    <% end %>
-
-    </div>
-
-
-
 
   </div>
-  <%#============================================%>
-    <%# SCRIPT : Charger la photo depuis localStorage %>
-      <%#============================================%>
-        <script>
-          // Fonction qui charge la photo
-          function loadUserPhoto() {
-            console.log("Script de chargement photo exécuté !")
-
-            // On récupère la photo depuis localStorage
-            const savedPhoto = localStorage.getItem("userSelfie")
-
-            console.log("Photo trouvée:", savedPhoto ? "OUI" : "NON")
-
-            // On récupère les éléments HTML
-            const userPhotoElement = document.getElementById("userPhoto")
-            const backgroundImage = document.querySelector(".card-result > img:first-child")
-
-            console.log("Element userPhoto:", userPhotoElement ? "OUI" : "NON")
-            console.log("Element background:", backgroundImage ? "OUI" : "NON")
-
-            // Si une photo existe dans localStorage
-            if (savedPhoto && userPhotoElement) {
-
-              // On met la photo sauvegardée dans l'élément <img>
-              userPhotoElement.src = savedPhoto
-
-              // On affiche la photo de l'utilisateur
-              userPhotoElement.style.display = "block"
-
-              // On cache l'image de fond
-              if (backgroundImage) {
-                backgroundImage.style.opacity = "0"
-              }
-
-              console.log("Photo chargée avec succès !")
-
-            } else {
-              console.log("Pas de photo ou élément non trouvé")
-            }
-          }
-
-          // ============================================
-          // IMPORTANT : Écouter les DEUX événements
-          // ============================================
-          // "DOMContentLoaded" = premier chargement de la page
-          // "turbo:load" = navigation avec Turbo (Rails 7)
-
-          document.addEventListener("DOMContentLoaded", loadUserPhoto)
-          document.addEventListener("turbo:load", loadUserPhoto)
-        </script>
 </div>
+
+<script>
+  function loadUserPhoto() {
+    const savedPhoto = localStorage.getItem("userSelfie")
+    const userPhotoElement = document.getElementById("userPhoto")
+    const backgroundImage = document.querySelector(".card-result .card-image")
+
+    if (savedPhoto && userPhotoElement) {
+      userPhotoElement.src = savedPhoto
+      userPhotoElement.style.display = "block"
+      if (backgroundImage) {
+        backgroundImage.style.opacity = "0"
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", loadUserPhoto)
+  document.addEventListener("turbo:load", loadUserPhoto)
+</script>

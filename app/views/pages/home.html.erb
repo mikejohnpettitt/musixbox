@@ -1,20 +1,35 @@
-<div class="container-100 d-flex flex-column justify-content-between">
-  <div class="d-flex justify-content-center align-items-center flex-grow-1">
+<div class="bg-blind-test position-relative overflow-hidden d-flex flex-column px-3 py-4">
+  
+  <!-- Decorative shapes -->
+  <div class="shape-1"></div>
+  <div class="shape-2"></div>
+  <div class="shape-3"></div>
 
-<%= link_to new_session_path(mode: "quickplay"),
-            onclick: "localStorage.removeItem('userSelfie')",
-            class: "buzzer d-flex justify-content-center align-items-center bg-orange-theme" do %>
-  Quickplay
-<% end %>
+  <!-- Header -->
+  <header class="text-center mb-4 position-relative" style="z-index: 1; margin-top: 5rem;">
+    <h1 class="app-title mb-2">♪ Musix Box ♫</h1>
+    <p class="app-subtitle mb-0">Guess the song, beat your friends</p>
+  </header>
 
+  <!-- Main Content -->
+  <main class="flex-grow-1 d-flex flex-column justify-content-center align-items-center position-relative" style="z-index: 1;">
+    <%= link_to new_session_path(mode: "quickplay"),
+        onclick: "localStorage.removeItem('userSelfie')",
+        class: "btn-quickplay d-flex flex-column justify-content-center align-items-center text-decoration-none" do %>
+      <span class="btn-quickplay-icon">▶</span>
+      <span class="btn-quickplay-text">Quickplay</span>
+      <span class="btn-quickplay-desc">Solo quick game</span>
+    <% end %>
+  </main>
 
-  </div>
-</div>
-<div class="bottom-buttons d-flex">
-
-<%= link_to new_session_path(mode: "match"),
-            class: "button-center flex-grow-1 bg-yellow-theme" do %>
-  Match
-<% end %>
-
+  <!-- Bottom Buttons -->
+  <nav class="d-flex gap-3 mt-4 position-relative flex-column align-items-center" style="z-index: 1;">
+    <%= link_to new_session_path(mode: "match"), class: "btn-match w-100 py-3 rounded-3 text-decoration-none text-center d-flex flex-column align-items-center justify-content-center" do %>
+      <span class="d-flex align-items-center gap-2">
+        <span>⚔️</span>
+        <span class="fw-bold">Match</span>
+      </span>
+      <span class="btn-match-desc">Play with friends</span>
+    <% end %>
+  </nav>
 </div>

@@ -10,6 +10,7 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= yield :head %>
     <% if content_for?(:meta_title) %>
       <meta property="og:title" content="<%= yield(:meta_title) %>">
       <meta property="og:description" content="<%= yield(:meta_description) %>">

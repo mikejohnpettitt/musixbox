@@ -1,0 +1,103 @@
+// _share.scss - Neo Brutalism styles for share page
+
+// Variables
+$orange: #F97316;
+$yellow: #FACC15;
+$green: #22c55e;
+$black: #1a1a1a;
+$bg: #FFF7ED;
+
+// Container
+.share-container {
+  max-width: 375px;
+  padding: 0 20px;
+  margin: 0 auto;
+  padding-top: 80px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+// Camera area
+.camera-area {
+  margin-bottom: 1rem;
+  
+  video, img {
+    width: 100%;
+    border-radius: 8px;
+  }
+}
+
+// Buttons container - fixed at bottom
+.share-buttons {
+  position: fixed;
+  bottom: 1rem;
+  left: 20px;
+  right: 20px;
+  max-width: 335px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0.5rem;
+}
+
+// Button base
+.btn-brutal {
+  border: 3px solid $black;
+  box-shadow: 4px 4px 0 $black;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  transition: all 0.15s ease;
+  text-transform: uppercase;
+  cursor: pointer;
+  
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 $black;
+  }
+}
+
+// Button orange (start camera)
+.btn-brutal-orange {
+  @extend .btn-brutal;
+  background: $orange;
+  color: white;
+  
+  &:hover {
+    color: white;
+    background: $orange;
+  }
+}
+
+// Button green (take photo, see card)
+.btn-brutal-green {
+  @extend .btn-brutal;
+  background: $green;
+  color: white;
+  
+  &:hover {
+    color: white;
+    background: $green;
+  }
+}
+
+// Button yellow (retake)
+.btn-brutal-yellow {
+  @extend .btn-brutal;
+  background: $yellow;
+  color: $black;
+  
+  &:hover {
+    color: $black;
+    background: $yellow;
+  }
+}
+
+// Card wrapper
+.card-wrapper {
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 5rem;
+}

@@ -1,0 +1,168 @@
+// _home.scss - Neo Brutalism styles for home page
+
+// Variables
+$orange: #F97316;
+$yellow: #FACC15;
+$bg: #FFF7ED;
+$black: #1a1a1a;
+
+// Background
+.bg-blind-test {
+  background: $bg;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
+}
+
+// Title
+.app-title {
+  font-weight: 700;
+  color: $black;
+  letter-spacing: -0.02em;
+  font-size: 2.5rem;
+}
+
+.app-subtitle {
+  color: $black;
+  font-weight: 500;
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  border-radius: 8px;
+}
+
+// Play Button
+.btn-quickplay {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: $orange;
+  border: 4px solid $black;
+  box-shadow: 8px 8px 0 $black;
+  transition: all 0.15s ease;
+  position: relative;
+
+  &:active {
+    transform: translate(4px, 4px);
+    box-shadow: 4px 4px 0 $black;
+  }
+}
+
+.btn-quickplay-icon {
+  font-size: 3rem;
+  color: white;
+  margin-left: 8px;
+}
+
+.btn-quickplay-text {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white;
+}
+
+.btn-quickplay-desc {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  margin-top: 0.2rem;
+}
+
+// Decorative shapes - hidden on small screens
+.shape-1, .shape-2, .shape-3 {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .shape-1 {
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: $yellow;
+    border: 3px solid $black;
+    border-radius: 12px;
+    top: 20%;
+    left: 10%;
+    transform: rotate(15deg);
+    z-index: 0;
+  }
+
+  .shape-2 {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: $orange;
+    border: 3px solid $black;
+    border-radius: 50%;
+    top: 30%;
+    right: 15%;
+    z-index: 0;
+  }
+
+  .shape-3 {
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: $yellow;
+    border: 3px solid $black;
+    bottom: 25%;
+    left: 8%;
+    transform: rotate(-10deg);
+    z-index: 0;
+  }
+}
+
+// Match Button
+.btn-match {
+  background: $yellow;
+  color: $black;
+  border: 3px solid $black;
+  box-shadow: 5px 5px 0 $black;
+  font-weight: 700;
+  transition: all 0.15s ease;
+  max-width: 280px;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 $black;
+  }
+}
+
+.btn-match-desc {
+  font-size: 0.75rem;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 500;
+}
+
+// Responsive
+@media (min-width: 375px) {
+  .btn-quickplay {
+    width: 180px;
+    height: 180px;
+  }
+  .btn-quickplay-icon {
+    font-size: 3.5rem;
+  }
+  .btn-quickplay-text {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 428px) {
+  .btn-quickplay {
+    width: 200px;
+    height: 200px;
+  }
+  .btn-quickplay-icon {
+    font-size: 4rem;
+  }
+  .btn-quickplay-text {
+    font-size: 1.1rem;
+  }
+  .app-title {
+    font-size: 3rem;
+  }
+}

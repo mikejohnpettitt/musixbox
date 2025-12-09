@@ -1,0 +1,137 @@
+// _session.scss - Neo Brutalism styles for session creation page
+
+// Variables
+$orange: #F97316;
+$yellow: #FACC15;
+$bg: #FFF7ED;
+$black: #1a1a1a;
+
+// Background
+.bg-session {
+  background: $bg;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: calc(5.5rem + env(safe-area-inset-top, 0px));
+}
+
+// Titles
+.page-title {
+  font-weight: 700;
+  color: $black;
+  letter-spacing: -0.02em;
+  font-size: 1.75rem;
+}
+
+.section-title {
+  font-weight: 600;
+  color: $black;
+  font-size: 1.1rem;
+}
+
+// Counter buttons
+.counter-btn {
+  width: 50px;
+  height: 50px;
+  background: white;
+  border: 3px solid $black;
+  box-shadow: 4px 4px 0 $black;
+  transition: all 0.15s ease;
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 $black;
+  }
+}
+
+.counter-value {
+  min-width: 60px;
+}
+
+// Playlist cards
+.playlist-card {
+  background: $orange;
+  border: 3px solid $black;
+  box-shadow: 4px 4px 0 $black;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  color: white;
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 $black;
+  }
+}
+
+input[type="radio"]:checked + .playlist-card {
+  background: $yellow;
+  color: $black;
+}
+
+// Submit button
+.btn-submit {
+  background: $yellow;
+  color: $black;
+  border: 3px solid $black;
+  box-shadow: 5px 5px 0 $black;
+  transition: all 0.15s ease;
+  max-width: 320px;
+
+  &:active {
+    transform: translate(3px, 3px);
+    box-shadow: 2px 2px 0 $black;
+  }
+}
+
+// Decorative shapes - hidden on small screens
+.shape-1, .shape-2, .shape-3 {
+  display: none;
+}
+
+@media (min-width: 500px) {
+  .shape-1 {
+    display: block;
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: $yellow;
+    border: 3px solid $black;
+    border-radius: 12px;
+    top: 15%;
+    left: 5%;
+    transform: rotate(15deg);
+    z-index: 0;
+  }
+
+  .shape-2 {
+    display: block;
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: $orange;
+    border: 3px solid $black;
+    border-radius: 50%;
+    top: 20%;
+    right: 8%;
+    z-index: 0;
+  }
+
+  .shape-3 {
+    display: block;
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: $yellow;
+    border: 3px solid $black;
+    bottom: 15%;
+    left: 8%;
+    transform: rotate(-10deg);
+    z-index: 0;
+  }
+}
+
+// Responsive
+@media (min-width: 428px) {
+  .page-title {
+    font-size: 2rem;
+  }
+}

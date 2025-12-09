@@ -12,9 +12,15 @@
 
         <%= render "shared/card" %>
 
-  </div>
-  </div>
-  </div>
+        <!-- BOUTONS PARTAGE ET SAUVEGARDE -->
+        <div class="d-flex gap-2 mt-4 justify-content-center no-print">
+          <button onclick="savePhoto()" class="btn btn-lg w-50" style="background: #FACC15 !important; border: 3px solid #1a1a1a !important; box-shadow: 4px 4px 0 #1a1a1a !important; font-weight: 700 !important; font-family: 'Space Grotesk', sans-serif !important;">
+            💾 Save
+          </button>
+          <button onclick="shareResults()" class="btn btn-lg w-50" style="background: #F97316 !important; border: 3px solid #1a1a1a !important; box-shadow: 4px 4px 0 #1a1a1a !important; font-weight: 700 !important; color: white !important; font-family: 'Space Grotesk', sans-serif !important;">
+            📤 Share
+          </button>
+        </div>
 
 <div class="bottom-buttons d-flex no-print">
   <%= button_tag "Save",

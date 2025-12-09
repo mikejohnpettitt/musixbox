@@ -1,21 +1,6 @@
-<nav class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "Logo sans nom 2.png", style: "width: 40px;" %>
-    <% end %>
-
-    <% if user_signed_in? %>
-      <div class="d-flex align-items-center">
-        <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item my-logout" %>
-        <%= link_to "#", class:"avatar ms-2" do %>
-          <%= image_tag "person.svg", class: "p-2 bg-yellow-theme rounded-circle", alt: "dropdown menu" %>
-        <% end %>
-
-      </div>
-    <% else %>
-        <div class="nav-item">
-          <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-        </div>
-    <% end %>
-  </div>
+<nav class="top-nav position-fixed top-0 start-0 end-0 d-flex justify-content-start align-items-center py-2 px-3">
+  <%= link_to root_path, class: "nav-item-brutal active d-flex align-items-center gap-2" do %>
+    <span class="nav-icon">🏠</span>
+    <span class="nav-label">Home</span>
+  <% end %>
 </nav>

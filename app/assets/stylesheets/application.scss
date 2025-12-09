@@ -4,6 +4,7 @@
 @import "config/colors";
 @import "config/bootstrap_variables";
 
+
 // External libraries
 @import "bootstrap";
 @import "font-awesome";
@@ -12,6 +13,18 @@
 @import "components/index";
 @import "pages/index";
 @import "pages/index";
+
+// style of the app
+@import "share";
+@import "home";
+@import "variables";
+@import "base";
+@import "home";
+@import "session";
+@import "show";
+@import "results";
+@import "card";
+
 
 
 // Background-theme colors :
