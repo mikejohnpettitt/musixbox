@@ -1,6 +1,6 @@
 <!--Interpoler une couleur random pour les logos-->
 <% colors = %w[#FF6B6B #4ECDC4 #45B7D1 #96CEB4 #FFEAA7 #DDA0DD #98D8C8] %>
-<div id="player_<%= user.id %>" class="player d-flex flex-row align-items-center">
-    <%= inline_svg_tag "person.svg", class: "p-2", style: "width:80px; height:80px; fill: #{colors.sample}" %>
+<div id="player_<%= user.id %>" class="col d-flex flex-column align-items-center" style="min-width: 80px; max-width: 100px;">
+    <i class="fa-solid fa-compact-disc fa-4x" style="color: <%= colors.sample %> ; -webkit-text-stroke: 3px black;"></i>
     <p  class="fw-bold" ><%= "User#{user.id}" %></p>
 </div>

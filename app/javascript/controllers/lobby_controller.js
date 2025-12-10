@@ -48,8 +48,13 @@ export default class extends Controller {
     console.log("HTML content:", data.html)
     console.log("Players element:", document.getElementById('players'))
 
-    if (data.type === "user_joined") {
-      document.getElementById('players').insertAdjacentHTML('beforeend', data.html)
+    if (data.type === 'user_joined') {
+      const playersEl = document.getElementById('players')
+      const existingPlayer = document.getElementById(`player_${data.user_id}`)
+
+      if (playersEl && !existingPlayer) {
+        playersEl.insertAdjacentHTML('beforeend', data.html)
+      }
     }
 
     if (data.type === 'video_paused') {
