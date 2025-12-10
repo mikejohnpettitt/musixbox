@@ -4,9 +4,9 @@ data-controller="lobby"
 data-lobby-group-id-value="<%= @group.id %>"
 data-lobby-user-id-value="<%= current_or_guest_user.id %>"
 data-lobby-start-url-value="<%= play_session_path(@user_session) %>"
-class="overflow-hidden mt-5"
+class="overflow-hidden container-navbar dvh-100" style="height: calc(100vh - 60px)"
 >
-  <div class="container d-flex  flex-column justify-content-between align-items-center h-100">
+  <div class="container d-flex flex-column justify-content-between align-items-center h-100">
     <div class="text-center">
       <h1>Lobby <%= @group.id %></h1>
       <%= raw(@qr_svg.html_safe) %>
@@ -20,7 +20,7 @@ class="overflow-hidden mt-5"
     <div>
       <button
   type="button"
-  class="btn-submit w-100 py-3 rounded-3 text-uppercase fw-bold"
+  class="btn-submit w-100 py-3 rounded-3 text-uppercase fw-bold mb-3"
   data-action="click->lobby#start"
         >
         Start game
