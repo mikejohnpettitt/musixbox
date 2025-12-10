@@ -7,20 +7,40 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
-    raise
-    @user_session = UserSession.find(params[:id])
+    @session = @question.session
+    @user_session = UserSession.where(user: current_or_guest_user).where(session: @session).first
 
     if @question.update(question_params)
       jarow = FuzzyStringMatch::JaroWinkler.create(:native)
       @accuracy_title = jarow.getDistance(@question.user_answer_title.downcase, @question.song.title.downcase)
       @accuracy_artist = jarow.getDistance(@question.user_answer_artist.downcase, @question.song.artist.downcase)
 
-      @accuracy_artist >= 0.85 ? @question.successful_artist = 1 : @question.successful_artist = 0
-      @accuracy_title >= 0.85 ? @question.successful_title = 1 : @question.successful_title = 0
+      if @accuracy_artist >= 0.85 
+        @question.successful_artist = 1 
+        @user_session.score += 1
+      else
+        @question.successful_artist = 0
+      end
 
+      if @accuracy_title >= 0.85 
+        @question.successful_title = 1 
+        @user_session.score += 1
+      else 
+        @question.successful_title = 0
+      end
 
+      if @question.successful_artist == true && @question.successful_title == true
+        @question.user = current_or_guest_user
+      end
+
+      if (@question.successful_artist == true && @question.successful_title == false) || (@question.successful_artist == false && @question.successful_title == true)
+        if @question.user == nil
+          @question.user = current_or_guest_user
+        end
+      end
 
       @question.save
+      @user_session.save
 
       # Données pour la barre de progression
       @questions = Question.where(session_id: @question.session_id).order(:id)
