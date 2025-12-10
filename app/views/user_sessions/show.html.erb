@@ -41,9 +41,10 @@
                   <%= image_tag "Logo_sans_nom_2.png" , style: "width: 200px;" %>
                 </div>
                 <% end %>
-                  <% if UserSession.where(group: @group).count> 1 %>
+                <% if UserSession.where(group: @user_session.group).count > 1 %>
                     <h2 id="buzzer-message" class="d-none text-center">Waiting for response...</h2>
-                    <% end %> 
+                    <% end %>
+
                      <!--Form -->
                       <div data-controller="counter" class="w-100" style="max-width: 320px;">
                         <div data-toggle-target="form" class="d-none text-center py-3">
