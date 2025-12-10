@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_12_08_085059) do
+ActiveRecord::Schema[7.1].define(version: 2025_12_10_084219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,12 +37,12 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_08_085059) do
     t.string "user_answer_artist"
     t.bigint "session_id", null: false
     t.bigint "song_id", null: false
-    t.bigint "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_questions_on_group_id"
+    t.bigint "user_id"
     t.index ["session_id"], name: "index_questions_on_session_id"
     t.index ["song_id"], name: "index_questions_on_song_id"
+    t.index ["user_id"], name: "index_questions_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -78,6 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_08_085059) do
     t.bigint "group_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "score"
     t.index ["group_id"], name: "index_user_sessions_on_group_id"
     t.index ["session_id"], name: "index_user_sessions_on_session_id"
     t.index ["user_id"], name: "index_user_sessions_on_user_id"
@@ -98,9 +99,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_12_08_085059) do
   end
 
   add_foreign_key "playlists", "users"
-  add_foreign_key "questions", "groups"
   add_foreign_key "questions", "sessions"
   add_foreign_key "questions", "songs"
+  add_foreign_key "questions", "users"
   add_foreign_key "sessions", "playlists"
   add_foreign_key "songs", "playlists"
   add_foreign_key "user_sessions", "groups"

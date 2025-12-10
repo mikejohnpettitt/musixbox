@@ -69,8 +69,7 @@ class UserSessionsController < ApplicationController
 
 
   def results
-          # 1. Trouver la UserSession
-    # @user_session = UserSession.find(params[:id])
+    # 1. Trouver la UserSession
     @user_session = UserSession.find(params[:id])
     @questions = @user_session.session.questions
     @playlist = @user_session.session.playlist
@@ -84,20 +83,30 @@ class UserSessionsController < ApplicationController
 
     @percentage = @max_score > 0 ? (@score.to_f / @max_score * 100).round : 0 # calcul du pourcentage en évitant l division par zéro
 
-
     # 1. Le temps de réponse le plus rapide (toutes questions confondues)
     if @questions.any?
       @fastest_response = @questions.order(:time_taken).first
 
-      # 2. Le titre trouvé le plus vite (uniquement les titres corrects)
-      @fastest_title = @questions
-        .where(successful_title: true)  # seulement les titres corrects
-        .order(:time_taken)             # tri des temps de réponse du + court au + long
-        .first                          # renvoie le temps le plus rapide
+    # 2. Le titre trouvé le plus vite (uniquement les titres corrects)
+    @fastest_title = @questions
+      .where(successful_title: true)  # seulement les titres corrects
+      .order(:time_taken)             # tri des temps de réponse du + court au + long
+      .first                          # renvoie le temps le plus rapide
     else
       @fastest_response = nil
       @fastest_title = nil
     end
+
+    # results for match mode
+    # who guessed the most correctly?
+    # first find the group
+    # find all user sessions for this group
+    # for each user session, search in the Questions for how many times their user ID appears
+    
+    @group = @user_session.group
+    @user_session_list = UserSession.where(group_id: @group.id)
+    @questions
+
   end
 
   def share

@@ -7,6 +7,8 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
+    raise
+    @user_session = UserSession.find(params[:id])
 
     if @question.update(question_params)
       jarow = FuzzyStringMatch::JaroWinkler.create(:native)
@@ -15,6 +17,9 @@ class QuestionsController < ApplicationController
 
       @accuracy_artist >= 0.85 ? @question.successful_artist = 1 : @question.successful_artist = 0
       @accuracy_title >= 0.85 ? @question.successful_title = 1 : @question.successful_title = 0
+
+
+
       @question.save
 
       # Données pour la barre de progression
