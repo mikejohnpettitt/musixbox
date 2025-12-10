@@ -1,0 +1,30 @@
+{
+  "name": "Musixbox, my blind test app",
+  "short_name": "Musixbox",
+  "description": " The best application for blind tests, single & multiplayer mode",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FACC14",
+  "theme_color": "#FF6B6B",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
+    <% files.each_with_index do |file, index| %>
+      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+      {
+        "src": "<%= image_path "icons/#{file}" %>",
+        "sizes": "<%= match && match[:size] %>",
+        "type": "image/png"
+      }<%= "," unless (files.size - 1) == index %>
+    <% end %>
+  ]
+}
+
+
+
+
+
+
+
+
