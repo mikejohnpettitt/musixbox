@@ -1,5 +1,5 @@
 <div class="bg-blind-test position-relative overflow-hidden d-flex flex-column px-3 py-4">
-  
+
   <!-- Decorative shapes -->
   <div class="shape-1"></div>
   <div class="shape-2"></div>
@@ -16,7 +16,7 @@
     <%= link_to new_session_path(mode: "quickplay"),
         onclick: "localStorage.removeItem('userSelfie')",
         class: "btn-quickplay d-flex flex-column justify-content-center align-items-center text-decoration-none" do %>
-      <span class="btn-quickplay-icon">▶</span>
+      <span class="btn-quickplay-icon"><i class="fa-solid fa-play" style="color: #ffffff;"></i></span>
       <span class="btn-quickplay-text">Quickplay</span>
       <span class="btn-quickplay-desc">Solo quick game</span>
     <% end %>

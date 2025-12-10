@@ -3,14 +3,26 @@
     <% if question.successful_title && question.successful_artist %>
       <div class="d-block">
         <h2>Correct!</h2>
-        <div>Artist: <%= question.song.artist %> ✅</div>
-        <div>Title: <%= question.song.title %> ✅</div>
+        <div>Artist: <%= question.song.artist %> <i class="fa-solid fa-check" style="color: #17922b;"></i></div>
+        <div>Title: <%= question.song.title %> <i class="fa-solid fa-check" style="color: #17922b;"></i></div>
       </div>
     <% else %>
       <div class="d-block">
         <h2>Keep going!</h2>
-        <div>Artist: <%= question.successful_artist ? "#{question.song.artist} ✅" : "#{question.user_answer_artist} ❌" %></div>
-        <div>Title: <%= question.successful_title ? "#{question.song.title} ✅" : "#{question.user_answer_title} ❌" %></div>
+        <div>Artist:
+          <% if question.successful_artist %>
+            <%= question.song.artist %> <i class="fa-solid fa-check" style="color: #17922b;"></i>
+          <% else %>
+            <%= question.user_answer_artist %> <i class="fa-solid fa-xmark" style="color: #e21818;"></i>
+          <% end %>
+        </div>
+        <div>Song:
+          <% if question.successful_title %>
+            <%= question.song.title %> <i class="fa-solid fa-check" style="color: #17922b;"></i>
+          <% else %>
+            <%= question.user_answer_title %> <i class="fa-solid fa-xmark" style="color: #e21818;"></i>
+          <% end %>
+        </div>
       </div>
     <% end %>
   </div>
