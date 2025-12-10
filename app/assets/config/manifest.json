@@ -1,0 +1,32 @@
+
+{
+  "name": "Musixbox, my blind test app",
+  "short_name": "Musixbox",
+  "description": " The best application for blind tests, single & multiplayer mode",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FACC14",
+  "theme_color": "#FF6B6B",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+
+
+
+
+
+
+
+
