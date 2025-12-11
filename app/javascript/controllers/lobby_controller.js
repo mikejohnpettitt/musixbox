@@ -17,7 +17,8 @@ export default class extends Controller {
         channel: "LobbyChannel",
         group_id: this.groupIdValue,
         user_session_id: this.userSessionIdValue,
-        user_id: this.userIdValue      },
+        user_id: this.userIdValue
+      },
       {
         received: this.received.bind(this)
       }
@@ -85,9 +86,11 @@ export default class extends Controller {
       const buzzer = document.querySelector('[data-toggle-target="buzzer"]')
       const buzzerMessage = document.getElementById('buzzer-message')
 
-      if (data.user_id === this.userIdValue) {
+      // Bouton Next déactivé pour tout le monde
+      this.disableNextButton()
+
+      if (data.user_id !== this.userIdValue) {
         // I pressed the buzzer - toggle controller handles this
-      } else {
         // Someone else pressed - hide my buzzer, show message
         if (buzzer) buzzer.classList.add('d-none')
         if (buzzerMessage) {
@@ -101,6 +104,9 @@ export default class extends Controller {
       const buzzer = document.querySelector('[data-toggle-target="buzzer"]')
       const buzzerMessage = document.getElementById('buzzer-message')
 
+      // Réactive le bouton Next pour tout le monde seulement si 1O secondes sont passées
+      this.enableNextButtonIfAllowed()
+
       // Show buzzer for everyone except the user who got it wrong
       if (data.user_id !== this.userIdValue) {
         if (buzzer) buzzer.classList.remove('d-none')
@@ -111,6 +117,9 @@ export default class extends Controller {
     if (data.type === 'round_won') {
       const buzzer = document.querySelector('[data-toggle-target="buzzer"]')
       const buzzerMessage = document.getElementById('buzzer-message')
+
+      // Active le bouton Next lorsque le round est gagné
+      this.enableNextButton()
 
       if (buzzer) buzzer.classList.add('d-none')
       if (buzzerMessage) {
@@ -162,4 +171,30 @@ export default class extends Controller {
     this.channel.perform('play_video', { user_id: this.userIdValue })
   }
 
+  disableNextButton() {
+    const nextButton = document.querySelector('[data-counter-target="nextButton"]')
+    if (nextButton) {
+      nextButton.disabled = true
+    }
+  }
+
+  enableNextButton() {
+    const nextButton = document.querySelector('[data-counter-target="nextButton"]')
+    if (nextButton) {
+      nextButton.disabled = false
+    }
+  }
+
+  enableNextButtonIfAllowed() {
+    const counterEl = document.querySelector('[data-controller~="counter"]')
+    if (counterEl) {
+      const counterController = this.application.getControllerForElementAndIdentifier(counterEl, 'counter')
+      if (counterController && counterController.elapsed >= 10000) {
+        const nextButton = document.querySelector('[data-counter-target="nextButton"]')
+        if (nextButton) {
+          nextButton.disabled = false
+        }
+      }
+    }
+  }
 }
