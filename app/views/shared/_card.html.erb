@@ -7,18 +7,19 @@
 
   <!-- Overlay avec stats -->
   <div class="card-overlay">
-
+    
     <% if @percentage > 80 %>
-      <div class="trophy-card">
+      <div class="trophy-card mx-1">
         <h3 class="trophy-title">🏆 Ace of <%= @playlist.title %> 🏆</h3>
         <% if @percentage == 100 %>
           <p class="trophy-perfect">Perfect score!</p>
         <% end %>
       </div>
     <% end %>
+<div class="d-flex align-items-stretch">
 
     <% if @fastest_title %>
-      <div class="fastest-card">
+      <div class="fastest-card flex-grow-1 m-1">
         <div class="fastest-label">🎯 Fastest guess</div>
         <div class="fastest-time"><%= (@fastest_title.time_taken / 1000.0).round(2) %> sec</div>
         <% if @fastest_title.song %>
@@ -27,9 +28,18 @@
       </div>
     <% end %>
 
+    <% UserSession.where(group: @user_session.group).sort_by(&:score).reverse.to_a.each_with_index do |user_session, index| %>
+    <% if user_session.user == current_or_guest_user %>
+    <div class="podium-3 p-3 m-1">
+    <div class="">My position:</div>
+    <div class="podium-user">#<%= index+1 %></div>
+    </div>
+    <% end %>
+    <% end %>
+</div>
     <div class="card-footer">
       <span>🎸 MusixBox</span>
-      <span>musixbox.com</span>
+      <span>MusixBox.com</span>
     </div>
 
   </div>
