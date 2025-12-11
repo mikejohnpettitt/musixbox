@@ -1,67 +1,649 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="fr">
+
 <head>
-  <title>The change you wanted was rejected (422)</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
+<meta charset="UTF-8">
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+<title>Requête Incomprise | MusixBox 422</title>
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-  </style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* Styles de base identiques pour la cohérence */
+
+:root {
+
+--primary: #F97316;
+
+--secondary: #FACC15;
+
+--accent: #F97316;
+
+--orange: #F97316;
+
+--yellow: #FACC15;
+
+--bg: #FFF7ED;
+
+--black: #1A1A1A;
+
+--red: #EF4444;
+
+--green: #10B981;
+
+--blue: #3B82F6; /* Ajouté pour la 422 */
+
+}
+
+* {
+
+font-family: 'Space Grotesk', sans-serif;
+
+margin: 0;
+
+padding: 0;
+
+box-sizing: border-box;
+
+}
+
+body {
+
+-webkit-tap-highlight-color: transparent;
+
+background: var(--bg);
+
+min-height: 100vh;
+
+min-height: 100dvh;
+
+display: flex;
+
+align-items: center;
+
+justify-content: center;
+
+padding: 20px;
+
+}
+
+.error-container {
+
+max-width: 800px;
+
+width: 100%;
+
+background: white;
+
+border-radius: 24px;
+
+border: 4px solid var(--black);
+
+box-shadow: 12px 12px 0 var(--black);
+
+overflow: hidden;
+
+display: flex;
+
+flex-direction: column;
+
+align-items: center;
+
+text-align: center;
+
+padding: 40px 30px;
+
+position: relative;
+
+}
+
+/* Formes décoratives avec couleurs adaptées */
+
+.shape-1 {
+
+position: absolute;
+
+width: 70px;
+
+height: 70px;
+
+background: var(--blue); /* Changé pour bleu (422) */
+
+border: 3px solid var(--black);
+
+border-radius: 12px;
+
+top: 10%;
+
+right: 7%;
+
+transform: rotate(25deg);
+
+z-index: 0;
+
+}
+
+.shape-2 {
+
+position: absolute;
+
+width: 50px;
+
+height: 50px;
+
+background: var(--orange);
+
+border: 3px solid var(--black);
+
+border-radius: 50%;
+
+bottom: 25%;
+
+left: 8%;
+
+z-index: 0;
+
+}
+
+.shape-3 {
+
+position: absolute;
+
+width: 45px;
+
+height: 45px;
+
+background: var(--yellow);
+
+border: 3px solid var(--black);
+
+border-radius: 8px;
+
+top: 30%;
+
+left: 10%;
+
+transform: rotate(-15deg);
+
+z-index: 0;
+
+}
+
+.error-image-container {
+
+width: 100%;
+
+max-width: 400px;
+
+margin-bottom: 30px;
+
+position: relative;
+
+z-index: 5;
+
+}
+
+.error-image {
+
+width: 100%;
+
+height: auto;
+
+border-radius: 16px;
+
+border: 4px solid var(--black);
+
+box-shadow: 8px 8px 0 var(--black);
+
+}
+
+.error-code {
+
+font-size: 7rem;
+
+font-weight: 800;
+
+color: var(--black);
+
+line-height: 1;
+
+margin-bottom: 10px;
+
+position: relative;
+
+z-index: 5;
+
+text-shadow: 4px 4px 0 var(--blue); /* Changé pour bleu */
+
+}
+
+.error-title {
+
+font-size: 2.5rem;
+
+font-weight: 700;
+
+color: var(--black);
+
+margin-bottom: 20px;
+
+line-height: 1.2;
+
+position: relative;
+
+z-index: 5;
+
+}
+
+.error-message {
+
+font-size: 1.2rem;
+
+color: var(--black);
+
+max-width: 600px;
+
+margin-bottom: 30px;
+
+line-height: 1.6;
+
+font-weight: 500;
+
+position: relative;
+
+z-index: 5;
+
+}
+
+.highlight {
+
+color: var(--blue); /* Changé pour bleu */
+
+font-weight: 700;
+
+background: var(--yellow);
+
+padding: 2px 8px;
+
+border-radius: 6px;
+
+border: 2px solid var(--black);
+
+display: inline-block;
+
+transform: rotate(2deg);
+
+}
+
+.action-buttons {
+
+display: flex;
+
+gap: 20px;
+
+flex-wrap: wrap;
+
+justify-content: center;
+
+margin-top: 20px;
+
+position: relative;
+
+z-index: 5;
+
+}
+
+.btn {
+
+padding: 16px 32px;
+
+border-radius: 12px;
+
+font-weight: 700;
+
+font-size: 1.1rem;
+
+text-decoration: none;
+
+transition: all 0.15s ease;
+
+cursor: pointer;
+
+border: 3px solid var(--black);
+
+box-shadow: 5px 5px 0 var(--black);
+
+text-transform: uppercase;
+
+position: relative;
+
+z-index: 5;
+
+}
+
+.btn:active {
+
+transform: translate(3px, 3px);
+
+box-shadow: 2px 2px 0 var(--black);
+
+}
+
+.btn-primary {
+
+background: var(--blue); /* Changé pour bleu */
+
+color: white;
+
+}
+
+.btn-secondary {
+
+background: var(--yellow);
+
+color: var(--black);
+
+}
+
+.error-note {
+
+margin-top: 30px;
+
+padding: 20px;
+
+background: var(--bg);
+
+border-radius: 12px;
+
+border: 3px solid var(--black);
+
+font-size: 0.95rem;
+
+color: var(--black);
+
+max-width: 600px;
+
+position: relative;
+
+z-index: 5;
+
+box-shadow: 4px 4px 0 var(--black);
+
+}
+
+.error-note strong {
+
+color: var(--blue); /* Changé pour bleu */
+
+}
+
+.music-note {
+
+display: inline-block;
+
+animation: float 3s ease-in-out infinite;
+
+font-size: 1.8rem;
+
+margin: 0 8px;
+
+filter: drop-shadow(2px 2px 0 var(--black));
+
+}
+
+.music-note:nth-child(2) {
+
+animation-delay: 0.5s;
+
+}
+
+.music-note:nth-child(3) {
+
+animation-delay: 1s;
+
+}
+
+@keyframes float {
+
+0%, 100% {
+
+transform: translateY(0) rotate(0deg);
+
+}
+
+50% {
+
+transform: translateY(-10px) rotate(5deg);
+
+}
+
+}
+
+/* Élément visuel spécifique à la 422 : une partition confuse */
+
+.confused-staff {
+
+position: absolute;
+
+width: 80%;
+
+height: 4px;
+
+background: var(--black);
+
+border-radius: 2px;
+
+opacity: 0.3;
+
+}
+
+.confused-staff:nth-child(1) {
+
+top: 15%;
+
+left: 10%;
+
+transform: rotate(15deg);
+
+}
+
+.confused-staff:nth-child(2) {
+
+top: 20%;
+
+right: 10%;
+
+transform: rotate(-10deg);
+
+}
+
+.confused-staff:nth-child(3) {
+
+bottom: 20%;
+
+left: 15%;
+
+transform: rotate(5deg);
+
+}
+
+@media (max-width: 768px) {
+
+.error-code {
+
+font-size: 5rem;
+
+}
+
+.error-title {
+
+font-size: 2rem;
+
+}
+
+.error-message {
+
+font-size: 1rem;
+
+}
+
+.error-container {
+
+padding: 30px 20px;
+
+}
+
+.btn {
+
+padding: 14px 28px;
+
+font-size: 1rem;
+
+}
+
+.shape-1, .shape-2, .shape-3, .confused-staff {
+
+display: none;
+
+}
+
+.error-image-container {
+
+max-width: 350px;
+
+margin-bottom: 25px;
+
+}
+
+}
+
+@media (max-width: 480px) {
+
+.action-buttons {
+
+flex-direction: column;
+
+width: 100%;
+
+}
+
+.btn {
+
+width: 100%;
+
+}
+
+.error-container {
+
+border-width: 3px;
+
+box-shadow: 8px 8px 0 var(--black);
+
+}
+
+.error-image-container {
+
+max-width: 300px;
+
+margin-bottom: 20px;
+
+}
+
+}
+
+</style>
+
 </head>
 
-<body class="rails-default-error-page">
-  <!-- This file lives in public/422.html -->
-  <div class="dialog">
-    <div>
-      <h1>The change you wanted was rejected.</h1>
-      <p>Maybe you tried to change something you didn't have access to.</p>
-    </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+<body>
+
+<div class="error-container">
+
+<div class="shape-1"></div>
+
+<div class="shape-2"></div>
+
+<div class="shape-3"></div>
+
+<!-- Lignes de partition "confuses" pour symboliser l'erreur 422 -->
+
+<div class="confused-staff"></div>
+
+<div class="confused-staff"></div>
+
+<div class="confused-staff"></div>
+
+<div class="error-image-container">
+
+<!-- Remplace par le chemin de ton image pour la 422 -->
+
+<img
+
+src="/images/Die_Cut_Vinyl_Sticker_422.jpeg"
+
+alt="Erreur 422 - Partition confuse"
+
+class="error-image"
+
+>
+
+</div>
+
+<div class="error-code">422</div>
+
+<h1 class="error-title">
+
+<span class="music-note">🎼</span>
+
+Sorry, this sheet music is unreadable!
+
+<span class="music-note">🤔</span>
+
+</h1>
+
+<p class="error-message">
+
+We couldn't <span class="highlight">understand your request</span>.
+
+<br>
+
+It's like a musical note in an unknown key – our server doesn't know how to play it.
+
+</p>
+
+<div class="action-buttons">
+
+<a href="/" class="btn btn-primary">
+
+Back to the melody <span class="music-note">🎶</span>
+
+</a>
+
+<a href="javascript:history.back()" class="btn btn-secondary">
+
+Try again
+
+</a>
+
+</div>
+
+<div class="error-note">
+
+<strong>Note for the conductor (admin):</strong> The request was syntactically correct but semantically incorrect. Please check the submitted data.
+
+</div>
+
+</div>
+
 </body>
+
 </html>
