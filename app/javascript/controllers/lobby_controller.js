@@ -150,10 +150,7 @@ export default class extends Controller {
 
   goToNext(event) {
     event.preventDefault()
-    console.log("href:", event.currentTarget.href)
-    const url = new URL(event.currentTarget.href)
-    const questionId = url.searchParams.get('current_question')
-    console.log("questionId:", questionId)
+    const questionId = event.currentTarget.dataset.questionId
     this.channel.perform('next_question', { question_id: questionId })
   }
 

@@ -2,13 +2,19 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="counter"
 export default class extends Controller {
-  static targets = ["input"]
+  static targets = ["input", "nextButton"]
 
   // Lancement du temps à la connection et initialisation du elapsed
   connect() {
     this.startTime = Date.now()
     this.elapsed = 0
     this.startStopwatch()
+
+    // Désactive le bouton Next tant que 10s n'est pas passé
+    this.enableTimeout = setTimeout(() => {
+      this.nextButtonTarget.disabled = false
+    }, 10000)
+
   }
 
   // Arrêt du chrono, différence entre le temps de fin et le temps lancé à la connection,
@@ -38,5 +44,8 @@ export default class extends Controller {
   // Nettoyage du chrono
   disconnect() {
     clearInterval(this.timer)
+    clearTimeout(this.enableTimeout)
+
   }
+
 }

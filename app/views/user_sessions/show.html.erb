@@ -1,86 +1,85 @@
 <% questions=Question.where(session_id: @user_session.session_id).order(:id) %>
-  <% total_questions=questions.count %>
-    <% current_index=questions.find_index { |q| q.id==@current_question.id }.to_i + 1 %>
-      <div class="container-100 d-flex flex-column justify-content-between position-relative" data-controller="lobby"
+<% total_questions=questions.count %>
+<% current_index=questions.find_index { |q| q.id==@current_question.id }.to_i + 1 %>
+<div class="container-100 d-flex flex-column justify-content-between position-relative"
+        data-controller="lobby"
         data-lobby-user-id-value="<%= current_or_guest_user.id %>"
         data-lobby-group-id-value="<%= @user_session.group.id %>"
         data-lobby-start-url-value="<%= play_session_path(@user_session) %>"
         data-lobby-session-path-value="<%= play_session_path(@user_session) %>">
-        <div class="bg-show" data-controller="youtube toggle">
-          <!-- Video STICKY avec progress bar et feedback PAR-DESSUS -->
-          <div class="video-sticky position-relative">
-            <!-- Progress bar SUR la vidéo -->
-            <div id="progress_bar">
-              <div class="d-flex gap-1 mb-1">
-                <% (1..total_questions).each do |i| %>
-                  <div class="progress-brutal flex-grow-1">
-                    <% if i <=current_index %>
-                      <div class="progress-brutal-fill"></div>
-                      <% else %>
-                        <div class="progress-brutal-empty"></div>
-                        <% end %>
-                  </div>
-                  <% end %>
-              </div>
+  <div class="bg-show" data-controller="youtube toggle counter">
+    <!-- Video STICKY avec progress bar et feedback PAR-DESSUS -->
+    <div class="video-sticky position-relative">
+      <!-- Progress bar SUR la vidéo -->
+      <div id="progress_bar">
+        <div class="d-flex gap-1 mb-1">
+          <% (1..total_questions).each do |i| %>
+            <div class="progress-brutal flex-grow-1">
+              <% if i <=current_index %>
+                <div class="progress-brutal-fill"></div>
+              <% else %>
+                <div class="progress-brutal-empty"></div>
+              <% end %>
             </div>
-            <!-- Feedback SUR la vidéo -->
-            <turbo-frame id="feedback_content">
-            </turbo-frame>
-            <!-- Video -->
-            <%= turbo_frame_tag "question" do %>
-              <%= render "questions/video" , question: @current_question %>
-                <% end %>
-          </div>
-          <!-- Contenu SOUS la vidéo (scrollable) -->
-          <div class="content-below d-flex flex-column align-items-center justify-content-center flex-grow-1" style="min-height: calc(100vh - 300px);">
-            <!-- Buzzer -->
-            <div class="d-flex justify-content-center align-items-center flex-column w-100">
-              <%= link_to "#" , data: { action: "click->toggle#buzz click->lobby#buzzerPressed click->lobby#pauseVideo"
-                } do %>
-                <div class="buzzer d-flex justify-content-center align-items-center" data-toggle-target="buzzer" style="width: 250px; height: 250px;">
-                  <%= image_tag "Logo_sans_nom_2.png" , style: "width: 200px;" %>
-                </div>
-                <% end %>
-                <% if UserSession.where(group: @user_session.group).count > 1 %>
-                    <h2 id="buzzer-message" class="d-none text-center">Waiting for response...</h2>
-                    <% end %>
-
-                     <!--Form -->
-                      <div data-controller="counter" class="w-100" style="max-width: 320px;">
-                        <div data-toggle-target="form" class="d-none text-center py-3">
-                          <h2 class="form-title mb-3">Take your guess!</h2>
-                          <%= simple_form_for @current_question, data: {
-                            action: "submit->counter#saveTime turbo:submit-end->toggle#submitted" } do |f| %>
-                            <%= f.hidden_field :time_taken, data: { counter_target: "input" } %>
-                              <div class="mb-2">
-                                <%= f.input :user_answer_artist, placeholder: "Artist" , label: false, input_html: {
-                                  class: "form-input" } %>
-                              </div>
-                              <div class="mb-3">
-                                <%= f.input :user_answer_title, placeholder: "Title" , label: false, input_html: {
-                                  class: "form-input" } %>
-                              </div>
-                              <%= f.submit "Go!" , class: "btn-go" %>
-                                <% end %>
-                        </div>
-                      </div>
-                      <!-- Well done -->
-                      <div class="d-none d-flex justify-content-center align-items-center py-3"
-                        data-toggle-target="welldone">
-                        <%= image_tag "thumbsup.png" , class: "welldone-img" %>
-                      </div>
-            </div>
-            <!-- Next button -->
-         <div class="position-fixed bottom-0 start-0 end-0 d-flex justify-content-center pb-4 px-3">
-  <div class="w-100" style="max-width: 320px;">
-    <%= link_to play_session_path(@user_session, current_question: @current_question),
-      class: "btn-next d-block w-100 py-3 rounded-3 text-center text-decoration-none",
-      data: { action: "click->lobby#goToNext" } do %>
-      Next →
-    <% end %>
-  </div>
-
-            </div>
-          </div>
+          <% end %>
         </div>
       </div>
+      <!-- Feedback SUR la vidéo -->
+      <turbo-frame id="feedback_content">
+      </turbo-frame>
+      <!-- Video -->
+      <%= turbo_frame_tag "question" do %>
+        <%= render "questions/video" , question: @current_question %>
+      <% end %>
+    </div>
+    <!-- Contenu SOUS la vidéo (scrollable) -->
+    <div class="content-below d-flex flex-column align-items-center justify-content-center flex-grow-1" style="min-height: calc(100vh - 300px);">
+      <div class="d-flex justify-content-center align-items-center flex-column w-100">
+        <!-- Buzzer -->
+        <%= link_to "#" , data: { action: "click->toggle#buzz click->lobby#buzzerPressed click->lobby#pauseVideo"} do %>
+          <div class="buzzer d-flex justify-content-center align-items-center" data-toggle-target="buzzer" style="width: 250px; height: 250px;">
+            <%= image_tag "Logo_sans_nom_2.png" , style: "width: 200px;" %>
+          </div>
+        <% end %>
+        <!--Message if someone is answering-->
+        <% if UserSession.where(group: @user_session.group).count > 1 %>
+          <h2 id="buzzer-message" class="d-none text-center">Waiting for response...</h2>
+        <% end %>
+        <!--Form -->
+        <div class="w-100" style="max-width: 320px;">
+          <div data-toggle-target="form" class="d-none text-center py-3">
+            <h2 class="form-title mb-3">Take your guess!</h2>
+            <%= simple_form_for @current_question, data: { action: "submit->counter#saveTime turbo:submit-end->toggle#submitted" } do |f| %>
+              <%= f.hidden_field :time_taken, data: { counter_target: "input" } %>
+              <div class="mb-2">
+                <%= f.input :user_answer_artist, placeholder: "Artist" , label: false, input_html: { class: "form-input" } %>
+              </div>
+              <div class="mb-3">
+                <%= f.input :user_answer_title, placeholder: "Title" , label: false, input_html: { class: "form-input" } %>
+              </div>
+              <%= f.submit "Go!" , class: "btn-go" %>
+            <% end %>
+          </div>
+        </div>
+        <!-- Well done -->
+        <div class="d-none d-flex justify-content-center align-items-center py-3" data-toggle-target="welldone">
+          <%= image_tag "thumbsup.png" , class: "welldone-img" %>
+        </div>
+      </div>
+    </div>
+    <!-- Next button -->
+    <div class="position-fixed bottom-0 start-0 end-0 d-flex justify-content-center pb-4 px-3">
+      <div class="w-100" style="max-width: 320px;">
+        <button
+                type="button"
+                class="btn-next d-block w-100 py-3 rounded-3 text-center text-decoration-none"
+                data-action="click->lobby#goToNext"
+          data-counter-target="nextButton"
+          data-question-id="<%= @current_question.id %>"
+          disabled>
+          Next →
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

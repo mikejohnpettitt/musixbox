@@ -30,7 +30,7 @@ export default class extends Controller {
       if (isSuccess) {
         // Correct! Hide form, show feedback
         this.formTarget.classList.add("d-none")
-        feedback.classList.remove("d-none")
+          feedback.classList.remove("d-none")
         this.welldoneTarget.classList.remove("d-none")
 
         // Broadcast correct answer
