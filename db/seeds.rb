@@ -5,6 +5,7 @@ Session.destroy_all
 Song.destroy_all
 Playlist.destroy_all
 User.destroy_all
+Group.destroy_all
 
 puts "Création de l'utilisateur Admin de test..."
 
@@ -25,11 +26,11 @@ user = User.create!(
   # ADIL
   playlist_soul = Playlist.create!({title:"Soul", user: user})
   playlist_funk = Playlist.create!({title:"Funk", user: user})
-  playlist_disco = Playlist.create!({title:"disco", user: user})
+  playlist_disco = Playlist.create!({title:"Disco", user: user})
   # AXEL
-  playlist_classic = Playlist.create!({title:"Classic", user: user})
+  # playlist_classic = Playlist.create!({title:"Classic", user: user})
   playlist_punk = Playlist.create!({title:"Punk", user: user})
-  playlist_world = Playlist.create!({title:"World", user: user})
+  # playlist_world = Playlist.create!({title:"World", user: user})
 
 Song.create!(
   [
@@ -82,12 +83,12 @@ puts "success"
 
 Song.create!(
   [
-    {playlist: playlist_punk, title: "Basket Case",               artist: "Green Day",           youtube_url: "https://www.youtube.com/embed/NUTGr5t3MoY?si=1c7iinecHj4k_wGy"},
+    {playlist: playlist_punk, title: "Waiting Room",              artist: "Fugazi",              youtube_url: "https://www.youtube.com/embed/C3LXkdpHNOQ?si=duBjjNIBkd6A5LTb"},
     {playlist: playlist_punk, title: "All the Small Things",      artist: "blink-182",           youtube_url: "https://www.youtube.com/embed/9Ht5RZpzPqw?si=pM9YxDOIr1j5IiV1"},
     {playlist: playlist_punk, title: "Self Esteem",               artist: "The Offspring",       youtube_url: "https://www.youtube.com/embed/EtNZnhxWLHo?si=tXrGv-rhndurQmIu"},
     {playlist: playlist_punk, title: "American Idiot",            artist: "Green Day",           youtube_url: "https://www.youtube.com/embed/Ee_uujKuJMI?si=o3vgBxdLnNxH2-4_"},
-    {playlist: playlist_punk, title: "Stay together for the kids",artist: "blink-182",           youtube_url: "https://www.youtube.com/embed/k1BFHYtZlAU?si=o3kF0zGsNM_e6ppV"},
-    {playlist: playlist_punk, title: "Linoleum",                  artist: "NOFX",                youtube_url: "https://www.youtube.com/embed/d9ORimXBXLw?si=Wl-ZU0UnNv3ow013"},
+    {playlist: playlist_punk, title: "Still Waiting",             artist: "Sum 41",              youtube_url: "https://www.youtube.com/embed/Lz7kvJdwPOY?si=u04Ow3Tzqzu4m0ZM"},
+    {playlist: playlist_punk, title: "Stickin' In My Eye",        artist: "NOFX",                youtube_url: "https://www.youtube.com/embed/mDI7n96DLRk?si=XqquI_XwUM4s8wol"},
     {playlist: playlist_punk, title: "Time Bomb",                 artist: "Rancid",              youtube_url: "https://www.youtube.com/embed/LxaA9_mzOz4?si=Yb5ZDK3H9dxdB4E0"},
     {playlist: playlist_punk, title: "Anarchy in the U.K.",       artist: "Sex Pistols",         youtube_url: "https://www.youtube.com/embed/qbmWs6Jf5dc?si=2q6_4VtY4UsKxZAb"},
     {playlist: playlist_punk, title: "Blitzkrieg Bop",            artist: "Ramones",             youtube_url: "https://www.youtube.com/embed/NQDPx_k66w4?si=HsbkmnAR26-ax4sN"},
