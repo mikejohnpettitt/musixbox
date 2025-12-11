@@ -2,7 +2,9 @@
 <% content_for :meta_title, "result" %>
 <% content_for :meta_description, "description" %>
 
-<div class="share-container" data-controller="camera" data-card-url="<%= share_card_play_session_path(@user_session) %>">
+<div class="share-container" data-controller="camera" 
+     data-card-url="<%= share_card_play_session_path(@user_session) %>"
+     data-results-url="<%= play_session_results_path(@user_session) %>">
   
   <%# ZONE CAMÉRA %>
   <div class="camera-area">
