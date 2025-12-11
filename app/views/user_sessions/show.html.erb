@@ -33,7 +33,7 @@
       <% end %>
     </div>
     <!-- Contenu SOUS la vidéo (scrollable) -->
-    <div class="content-below d-flex flex-column align-items-center justify-content-center flex-grow-1" style="min-height: calc(100vh - 300px);">
+    <div class="content-below d-flex flex-column align-items-center justify-content-center flex-grow-1" style="min-height: calc(100vh - 350px);">
       <div class="d-flex justify-content-center align-items-center flex-column w-100">
         <!-- Buzzer -->
         <%= link_to "#" , data: { action: "click->toggle#buzz click->lobby#buzzerPressed click->lobby#pauseVideo"} do %>
@@ -68,7 +68,7 @@
       </div>
     </div>
     <!-- Next button -->
-    <div class="position-fixed bottom-0 start-0 end-0 d-flex justify-content-center pb-4 px-3">
+    <div class="bottom-0 start-0 end-0 d-flex justify-content-center pb-4 px-3">
       <div class="w-100" style="max-width: 320px;">
         <button
                 type="button"
