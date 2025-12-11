@@ -62,9 +62,10 @@ async autoStartCamera() {
     
     console.log("Caméra démarrée automatiquement !")
     
-  } catch (error) {
-    alert("Erreur caméra: " + error.message)
-  }
+  }catch (error) {
+  console.error("Erreur caméra:", error.name, error.message)
+  window.location.href = this.element.dataset.resultsUrl
+}
 }
 
   // ============================================
