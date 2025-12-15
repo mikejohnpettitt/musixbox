@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
 
-  resources :playlists, only:[:index]
+  # resources :playlists, only:[:index]
   resources :questions, only:[:create, :show, :edit, :update]
 
   resources :sessions, only:[:create, :new]

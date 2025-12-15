@@ -1,5 +1,3 @@
-console.log("share_card.js loaded");
-
 // Partage des résultats
 window.shareResults = function () {
   if (navigator.share) {

@@ -1,25 +1,24 @@
-<head>
-  <title>Share Card - MusixBox</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-</head>
-<body>
+<div class="bg-session vh-100 position-relative overflow-hidden d-flex flex-column px-3 pt-5 pb-4">
+  <head>
+    <title>Share Card - MusixBox</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  </head>
 
-  <div class="share-card-page">
-    <div class="share-card-content">
-      <%= render "shared/card" %>
+  <main class="flex-grow-1 d-flex justify-content-center align-items-center overflow-hidden share-card-page">
+      <div class="share-card-content">
+        <%= render "shared/card" %>
+      </div>
+  </main>
 
-    </div>
+  <!-- BOUTONS PARTAGE ET SAUVEGARDE -->
+  <nav class="share-card-buttons no-print">
+    <button onclick="savePhoto()" class="btn-selfie flex-grow-1">
+      💾 Save
+    </button>
+    <button onclick="shareResults()" class="btn-share flex-grow-1">
+      📤 Share
+    </button>
+  </nav>
 
-    <!-- BOUTONS PARTAGE ET SAUVEGARDE -->
-    <div class="share-card-buttons no-print">
-      <button onclick="savePhoto()" class="btn-selfie flex-grow-1">
-        💾 Save
-      </button>
-      <button onclick="shareResults()" class="btn-share flex-grow-1">
-        📤 Share
-      </button>
-    </div>
-  </div>
-
-</body>
+</div>
