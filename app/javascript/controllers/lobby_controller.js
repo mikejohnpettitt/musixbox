@@ -11,7 +11,6 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log("connected")
     this.channel = consumer.subscriptions.create(
       {
         channel: "LobbyChannel",
@@ -45,9 +44,6 @@ export default class extends Controller {
 
 
   received(data) {
-    console.log("Received:", data)
-    console.log("HTML content:", data.html)
-    console.log("Players element:", document.getElementById('players'))
 
     if (data.type === 'user_joined') {
       const playersEl = document.getElementById('players')
@@ -75,7 +71,6 @@ export default class extends Controller {
     }
 
     if (data.type === "user_left") {
-      // console.log(`${data.user_id} left the lobby`)
       const playerElement = document.getElementById(`player_${data.user_id}`)
       if (playerElement) {
         playerElement.remove()

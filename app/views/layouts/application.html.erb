@@ -8,11 +8,10 @@
     <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
     <%= render 'shared/ios_pwa_links' %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
           crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= yield :head %>
@@ -24,12 +23,11 @@
       <meta property="og:type" content="website">
     <% end %>
   </head>
-
   <body class="bg-cream-theme">
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
-
-    <%= yield %>
-
+    <div class="container-navbar">
+      <%= yield %>
+    </div>
   </body>
 </html>

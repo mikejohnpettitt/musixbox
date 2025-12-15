@@ -1,5 +1,5 @@
-<div class="container-navbar overflow-hidden p-3 bg-results d-flex flex-column justify-content-between">
-
+<div class="p-3 bg-results d-flex flex-column justify-content-between">
+<div>
   <div class="shape-1"></div>
   <div class="shape-2"></div>
   <div class="shape-3"></div>
@@ -33,7 +33,7 @@
       <div class="score-percentage"><%= @percentage %>%</div>
       <div class="score-text"><%= @score %> / <%= @max_score %></div>
     </div>
-  
+
   <!-- Fastest Guess -->
   <% if @fastest_title %>
     <div class="fastest-card m-1 position-relative flex-grow-1 text-center" style="z-index: 1;">
@@ -97,12 +97,12 @@
       <% end %>
     </div>
   <% end %>
-
+</div>
 
 <% end %>
 <div>
   <!-- Buttons -->
-  <div class="mt-auto position-relative" style="z-index: 1; margin-bottom: 60px">
+  <div>
     <div class="d-flex gap-3">
       <%= link_to share_card_play_session_path(@user_session), class: "btn-share flex-grow-1" do %>
         Share results
