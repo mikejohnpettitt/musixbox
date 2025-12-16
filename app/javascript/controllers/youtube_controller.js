@@ -6,7 +6,6 @@ export default class extends Controller {
   static targets = ["player"]
 
   connect() {
-    console.log("youtube connecté")
     this.loadYouTubeAPI()
   }
 
@@ -42,14 +41,12 @@ export default class extends Controller {
   }
 
   pause() {
-    console.log("pause() called")
     if (this.ytPlayer) {
       this.ytPlayer.pauseVideo()
     }
   }
 
   play() {
-    console.log("play() called")
     if (this.ytPlayer) {
       this.ytPlayer.playVideo()
     }
